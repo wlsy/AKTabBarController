@@ -89,7 +89,7 @@ static int kInterTabMargin = 1;
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	    
     // fill ingthe background with a noise pattern
-    [[UIColor colorWithPatternImage:[UIImage imageNamed:@"noise-pattern"]] set];
+    [[UIColor colorWithPatternImage:[UIImage imageNamed:@"AKTabBarController.bundle/noise-pattern"]] set];
     
     CGContextFillRect(ctx, rect);
     
