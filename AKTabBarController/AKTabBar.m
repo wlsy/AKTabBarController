@@ -42,8 +42,7 @@ static int kInterTabMargin = 1;
         self.opaque = YES;
         self.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
                                  UIViewAutoresizingFlexibleHeight |
-                                 UIViewAutoresizingFlexibleTopMargin |
-                                 UIViewAutoresizingFlexibleBottomMargin);
+                                 UIViewAutoresizingFlexibleTopMargin);
     }
     return self;
 }

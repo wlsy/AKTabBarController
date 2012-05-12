@@ -83,7 +83,7 @@ static const int kTabBarHeight = 50;
     self.view = self.tabBarView;
         
     // Creating and adding the tab bar
-    CGRect tabBarRect = CGRectMake(0, self.view.frame.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight + 1);
+    CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight);
     self.tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
     self.tabBar.delegate = self;
     
@@ -160,10 +160,19 @@ static const int kTabBarHeight = 50;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
-    // redraw with will rotating and keeping the aspect ratio.
+
+    // In landscape mode, a 1px offset appears at the botton. This solves it
+    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+        CGRect tabBarRect = self.tabBar.frame;
+        tabBarRect.origin.y = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(tabBarRect);
+        self.tabBar.frame = tabBarRect;
+    }
+    
+    // Redraw with will rotating and keeping the aspect ratio
     for (AKTab *tab in [self.tabBar tabs]) {
         [tab setNeedsDisplay];
     }
+
     [self.selectedViewController willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:duration];
 }
 
