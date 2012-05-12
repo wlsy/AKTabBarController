@@ -28,8 +28,8 @@ static const float kAnimationDuration = 0.15;
 // Minimum height that permits the display of the tab's title.
 static const float kMinimumHeightTodisplayTabTitle = 35.0;
 
-static const float kPadding = 6.0;
-static const float kMargin = 4.0;
+static const float kPadding = 4.0;
+static const float kMargin = 2.0;
 static const float kTopMargin = 2.0;
 
 @interface AKTab ()
@@ -73,6 +73,7 @@ static const float kTopMargin = 2.0;
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"contents"];
     animation.duration = duration;
     [self.layer addAnimation:animation forKey:@"contents"];
+    [self setNeedsDisplay];
 }
 
 #pragma mark - Drawing
@@ -86,51 +87,71 @@ static const float kTopMargin = 2.0;
 
 - (void)drawRect:(CGRect)rect
 {
-    [super drawRect:rect];
-                
-    UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    // Used to scale the image in landscape mode
-    CGFloat scale = 1.0;
+    // Container, basically centered in rect
+    CGRect container = CGRectInset(rect, kPadding, kPadding);
+    container.size.height -= kTopMargin;
+    container.origin.y += kTopMargin;
     
-    // the scale when the device is rotated.
-    if (UIDeviceOrientationIsLandscape(orientation)) {
-        scale = [UIScreen mainScreen].bounds.size.height / [UIScreen mainScreen].bounds.size.width;
-    }
+    // Tab's image
+    UIImage *image = [UIImage imageNamed:self.tabImageWithName];
     
-    BOOL displayTabTitle = (rect.size.height >= kMinimumHeightTodisplayTabTitle) ? YES : NO;
+    // Getting the ratio for eventual scaling
+    CGFloat ratio = image.size.width / image.size.height;
     
-    // Rect containing the title and the image
-    CGRect contentRect = CGRectMake(rect.origin.x, rect.origin.y + kTopMargin, rect.size.width, rect.size.height - kTopMargin);
-    contentRect.origin.y += floorf(kPadding / 2);
-    contentRect.size.height -= kPadding;
+    // Setting the imageContainer's size.
+    CGRect imageRect = CGRectZero;
+    imageRect.size = image.size;
     
     // Title label
     UILabel *tabTitleLabel = [[UILabel alloc] init];
     tabTitleLabel.text = self.tabTitle;
     tabTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11.0];
-    [tabTitleLabel sizeToFit];
+    CGSize labelSize = [tabTitleLabel.text sizeWithFont:tabTitleLabel.font forWidth:CGRectGetWidth(rect) lineBreakMode:UILineBreakModeMiddleTruncation];
     
-    CGRect labelRect = tabTitleLabel.bounds;
-    labelRect.origin.x = floorf(CGRectGetMidX(contentRect) - labelRect.size.width / 2);
-    labelRect.origin.y = CGRectGetMaxY(contentRect) - labelRect.size.height;
+    CGRect labelRect = CGRectZero;
     
-    // We reset the label's rect if we do not want to display the title
-    if (!displayTabTitle) labelRect = CGRectZero;
-        
-    // tab's image
-    UIImage *image = [UIImage imageNamed:self.tabImageWithName];
+    // If the height of the container is too short, we do not display the title
+    BOOL displayTabTitle = (CGRectGetHeight(container) >= kMinimumHeightTodisplayTabTitle) ? YES : NO;
     
-    CGFloat ratio = image.size.width / image.size.height;
-    CGRect imageRect = CGRectZero;
-    imageRect.size.height = floorf((contentRect.size.height - labelRect.size.height - kMargin));
-    imageRect.size.width = floorf(imageRect.size.height * ratio);
-    imageRect.origin.x = floorf(CGRectGetMidX(contentRect) - imageRect.size.width / 2);
-    imageRect.origin.y = contentRect.origin.y;
-            
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-        
-    CGFloat offsetY = rect.size.height - (labelRect.size.height);
+    labelRect.size.height = (displayTabTitle) ? labelSize.height : 0;
+    
+    // Container of the image + label (when there is room)
+    CGRect content = CGRectZero;
+    content.size.width = CGRectGetWidth(container);
+    
+    // We determine the height based on the longest side of the image (when not square) , presence of the label and height of the container
+    content.size.height = MIN(MAX(CGRectGetWidth(imageRect), CGRectGetHeight(imageRect)) + ((displayTabTitle) ? (kMargin + CGRectGetHeight(labelRect)) : 0), CGRectGetHeight(container));
+    
+    // Now we move the boxes
+    content.origin.x = floorf(CGRectGetMidX(container) - CGRectGetWidth(content) / 2);
+    content.origin.y = floorf(CGRectGetMidY(container) - CGRectGetHeight(content) / 2);
+    
+    labelRect.size.width = CGRectGetWidth(content);
+    labelRect.origin.x = CGRectGetMinX(content);
+    labelRect.origin.y = CGRectGetMaxY(content) - CGRectGetHeight(labelRect);
+    
+    if (!displayTabTitle) {
+        labelRect = CGRectZero;
+    }
+    
+    CGRect imageContainer = content;
+    imageContainer.size.height = CGRectGetHeight(content) - ((displayTabTitle) ? (kMargin + CGRectGetHeight(labelRect)) : 0);
+    
+    // When the image is not square we have to make sure it will not go beyond the bonds of the container
+    if (CGRectGetWidth(imageRect) >= CGRectGetHeight(imageRect)) {
+        imageRect.size.width = MIN(CGRectGetHeight(imageRect), MIN(CGRectGetWidth(imageContainer), CGRectGetHeight(imageContainer)));
+        imageRect.size.height = floorf(CGRectGetWidth(imageRect) / ratio);
+    } else {
+        imageRect.size.height = MIN(CGRectGetHeight(imageRect), MIN(CGRectGetWidth(imageContainer), CGRectGetHeight(imageContainer)));
+        imageRect.size.width = floorf(CGRectGetHeight(imageRect) * ratio);
+    }
+    
+    imageRect.origin.x = floorf(CGRectGetMidX(content) - CGRectGetWidth(imageRect) / 2);
+    imageRect.origin.y = floorf(CGRectGetMidY(imageContainer) - CGRectGetHeight(imageRect) / 2);
+    
+    CGFloat offsetY = rect.size.height - ((displayTabTitle) ? (kMargin + CGRectGetHeight(labelRect)) : 0) + kTopMargin;
     
     if (!self.selected) {
         
@@ -143,7 +164,7 @@ static const float kTopMargin = 2.0;
             CGContextFillRect(ctx, CGRectMake(rect.size.width - 1, 2, 1, rect.size.height - 2));
         }
         CGContextRestoreGState(ctx);
-                    
+        
         // We draw the inner shadow which is just the image mask with an offset of 1 pixel
         CGContextSaveGState(ctx);
         {
@@ -154,7 +175,7 @@ static const float kTopMargin = 2.0;
             CGContextFillRect(ctx, imageRect);
         }
         CGContextRestoreGState(ctx);
-                
+        
         // We draw the inner gradient
         CGContextSaveGState(ctx);
         {
@@ -165,13 +186,13 @@ static const float kTopMargin = 2.0;
             size_t num_locations = 2;
             CGFloat locations[2] = {1.0, 0.0};
             CGFloat components[8] = {0.353, 0.353, 0.353, 1.0, // Start color
-                                    0.612, 0.612, 0.612, 1.0};  // End color
+                0.612, 0.612, 0.612, 1.0};  // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
             CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
-
+            
         }
         CGContextRestoreGState(ctx);
         
@@ -179,7 +200,7 @@ static const float kTopMargin = 2.0;
             CGContextSaveGState(ctx);
             {
                 CGContextSetRGBFillColor(ctx, 0.461, 0.461, 0.461, 1);
-                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font];
+                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font lineBreakMode:UILineBreakModeMiddleTruncation alignment:UITextAlignmentCenter];
             }
             CGContextRestoreGState(ctx);
         }
@@ -189,14 +210,14 @@ static const float kTopMargin = 2.0;
         // We fill the background with a noise pattern
         CGContextSaveGState(ctx);
         {
-            [[UIColor colorWithPatternImage:[UIImage imageNamed:@"noise-pattern"]] set];
+            [[UIColor colorWithPatternImage:[UIImage imageNamed:@"AKTabBarController.bundle/noise-pattern"]] set];
             CGContextFillRect(ctx, rect);
             
             // We set the parameters of th gradient multiply blend
             size_t num_locations = 2;
             CGFloat locations[2] = {1.0, 0.0};
             CGFloat components[8] = {0.6, 0.6, 0.6, 1.0,  // Start color
-                                    0.2, 0.2, 0.2, 0.4}; // End color
+                0.2, 0.2, 0.2, 0.4}; // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
             CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
@@ -231,7 +252,7 @@ static const float kTopMargin = 2.0;
             
         }
         CGContextRestoreGState(ctx);
-                    
+        
         // We draw the inner gradient
         CGContextSaveGState(ctx);
         {
@@ -242,7 +263,7 @@ static const float kTopMargin = 2.0;
             size_t num_locations = 2;
             CGFloat locations[2] = {1.0, 0.2};
             CGFloat components[8] = {0.082, 0.369, 0.663, 1.0, // Start color
-                                    0.537, 0.773, 0.988, 1.0};  // End color
+                0.537, 0.773, 0.988, 1.0};  // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
             CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
@@ -256,17 +277,17 @@ static const float kTopMargin = 2.0;
         // We draw the glossy effect over the image
         CGContextSaveGState(ctx);
         {   
-            // Center of the circle
-            CGFloat posX = CGRectGetMinX(rect);
-            CGFloat posY = CGRectGetMinY(rect) - rect.size.width;
+            // Center of the circle + an offset to have the right angle no matter the size of the container 
+            CGFloat posX = CGRectGetMinX(container) - CGRectGetHeight(container);
+            CGFloat posY = CGRectGetMinY(container) - CGRectGetHeight(container) * 2 - CGRectGetWidth(container);
             
-            // Getting the icon center position plus an arbitrary offset
-            CGFloat dX = CGRectGetMidX(imageRect) - posX + kTopMargin;
-            CGFloat dY = CGRectGetMidY(imageRect) - posY + kTopMargin;
+            // Getting the icon center
+            CGFloat dX = CGRectGetMidX(imageRect) - posX;
+            CGFloat dY = CGRectGetMidY(imageRect) - posY;
             
             // Calculating the radius
             CGFloat radius = sqrtf((dX * dX) + (dY * dY));
-           
+            
             // We draw the circular path
             CGMutablePathRef glossPath = CGPathCreateMutable();
             CGPathAddArc(glossPath, NULL, posX, posY, radius, M_PI, 0, YES);
@@ -281,14 +302,13 @@ static const float kTopMargin = 2.0;
             
             // Drawing the clipped gradient
             size_t num_locations = 2;
-            CGFloat locations[2] = {0, 1};
-            CGFloat components[8] = {1.0, 1.0, 1.0, 0.4, // Start color
-                                    1.0, 1.0, 1.0, 0.1};  // End color
+            CGFloat locations[2] = {1, 0};
+            CGFloat components[8] = {1.0, 1.0, 1.0, 0.5, // Start color
+                1.0, 1.0, 1.0, 0.15};  // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
             CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
-            
-            CGContextDrawLinearGradient(ctx, gradient, CGPointMake(rect.origin.x, rect.origin.y), CGPointMake(rect.size.width, image.size.height), kCGGradientDrawsAfterEndLocation);
+            CGContextDrawRadialGradient(ctx, gradient, CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect)), 0, CGPointMake(CGRectGetMaxX(imageRect), CGRectGetMaxY(imageRect)), radius, kCGGradientDrawsBeforeStartLocation);
             
         }
         CGContextRestoreGState(ctx);
@@ -297,12 +317,12 @@ static const float kTopMargin = 2.0;
             CGContextSaveGState(ctx);
             {
                 CGContextSetRGBFillColor(ctx, 0.961, 0.961, 0.961, 1);
-                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font];
+                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font lineBreakMode:UILineBreakModeMiddleTruncation alignment:UITextAlignmentCenter];
             }
             CGContextRestoreGState(ctx);
         }
         
     }
+    
 }
-
 @end

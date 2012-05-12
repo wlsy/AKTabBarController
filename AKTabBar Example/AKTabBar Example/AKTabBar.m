@@ -39,6 +39,7 @@ static int kInterTabMargin = 1;
         
         self.userInteractionEnabled = YES;
         self.contentMode = UIViewContentModeRedraw;
+        self.opaque = YES;
         self.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
                                  UIViewAutoresizingFlexibleHeight |
                                  UIViewAutoresizingFlexibleTopMargin);
@@ -75,7 +76,7 @@ static int kInterTabMargin = 1;
 
 #pragma mark - Delegate notification
 
-- (void)tabSelected:(UITapGestureRecognizer *)sender
+- (void)tabSelected:(AKTab *)sender
 {
     [self.delegate tabBar:self didSelectTabAtIndex:[self.tabs indexOfObject:sender]];
 }
@@ -89,7 +90,7 @@ static int kInterTabMargin = 1;
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
 	    
     // fill ingthe background with a noise pattern
-    [[UIColor colorWithPatternImage:[UIImage imageNamed:@"noise-pattern"]] set];
+    [[UIColor colorWithPatternImage:[UIImage imageNamed:@"AKTabBarController.bundle/noise-pattern"]] set];
     
     CGContextFillRect(ctx, rect);
     
