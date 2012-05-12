@@ -13,34 +13,32 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 
 ##Usage
 ### Creation and initialization of the tab bar
-``` objective-c  
-// Create and initialize the height of the tab bar to 50px.
-self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
+	// Create and initialize the height of the tab bar to 50px.
+	self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
+	
+	// Adding the view controllers to manage.
+	 [self.tabBarController setViewControllers:[NSMutableArray arrayWithObjects:
+                                               [[FirstViewController alloc] init],
+                                               [[SecondViewController alloc] init],
+                                               [[ThirdViewController alloc] init],
+                                               [[FourthViewController alloc] init],nil]
+     ];
 
-// Adding the view controllers to manage.
-[self.tabBarController setViewControllers:[NSMutableArray arrayWithObjects:
-                                              [[FirstViewController alloc] init],
-                                              [[SecondViewController alloc] init],
-                                              [[ThirdViewController alloc] init],
-                                              [[FourthViewController alloc] init],nil]
-    ];  
-```
 ### Setting the title and image
 (in each view controller)
 
-``` objective-c  
-// Setting the image of the tab.
-- (NSString *)tabImageName
-{
-	return @"myImage";
-}
-
-// Setting the title of the tab.
-- (NSString *)tabTitle
-{
-	return @"Tab";
-}  
-```
+	// Setting the image of the tab.
+	- (NSString *)tabImageName
+	{
+		return @"myImage";
+	}
+	
+	// Setting the title of the tab.
+	- (NSString *)tabTitle
+	{
+		return @"Tab";
+	}
+	
 
 For further details see the Xcode example project.
 
