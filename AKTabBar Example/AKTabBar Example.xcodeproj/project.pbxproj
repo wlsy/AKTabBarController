@@ -22,18 +22,17 @@
 		7B26380E1553352E00013EE7 /* image-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2638061553352E00013EE7 /* image-3@2x.png */; };
 		7B26380F1553352E00013EE7 /* image-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2638071553352E00013EE7 /* image-4.png */; };
 		7B2638101553352E00013EE7 /* image-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2638081553352E00013EE7 /* image-4@2x.png */; };
-		7B2638201553360900013EE7 /* AKTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2638141553360900013EE7 /* AKTab.m */; };
-		7B2638211553360900013EE7 /* AKTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2638161553360900013EE7 /* AKTabBar.m */; };
-		7B2638221553360900013EE7 /* AKTabBarController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7B2638171553360900013EE7 /* AKTabBarController.bundle */; };
-		7B2638231553360900013EE7 /* AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2638191553360900013EE7 /* AKTabBarController.m */; };
-		7B2638241553360900013EE7 /* AKTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26381B1553360900013EE7 /* AKTabBarView.m */; };
-		7B2638251553360900013EE7 /* UINavigationController+AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26381D1553360900013EE7 /* UINavigationController+AKTabBarController.m */; };
-		7B2638261553360900013EE7 /* UIViewController+AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26381F1553360900013EE7 /* UIViewController+AKTabBarController.m */; };
 		7B26382C155338C400013EE7 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26382B155338C400013EE7 /* SecondViewController.m */; };
 		7B26382F155338CC00013EE7 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26382E155338CC00013EE7 /* ThirdViewController.m */; };
 		7B263832155338D500013EE7 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B263831155338D500013EE7 /* FourthViewController.m */; };
 		7B26383B15533B2D00013EE7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26383A15533B2D00013EE7 /* FirstViewController.m */; };
 		7B26383E1553412000013EE7 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26383D1553412000013EE7 /* ContentViewController.m */; };
+		7BEB24A7155E8AF50020B3D9 /* AKTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB249A155E8AF50020B3D9 /* AKTab.m */; };
+		7BEB24A9155E8AF50020B3D9 /* AKTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB249C155E8AF50020B3D9 /* AKTabBar.m */; };
+		7BEB24AC155E8AF50020B3D9 /* AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB249F155E8AF50020B3D9 /* AKTabBarController.m */; };
+		7BEB24AE155E8AF50020B3D9 /* AKTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB24A1155E8AF50020B3D9 /* AKTabBarView.m */; };
+		7BEB24B0155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB24A3155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m */; };
+		7BEB24B2155E8AF50020B3D9 /* UIViewController+AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB24A5155E8AF50020B3D9 /* UIViewController+AKTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,19 +55,6 @@
 		7B2638061553352E00013EE7 /* image-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-3@2x.png"; sourceTree = "<group>"; };
 		7B2638071553352E00013EE7 /* image-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-4.png"; sourceTree = "<group>"; };
 		7B2638081553352E00013EE7 /* image-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image-4@2x.png"; sourceTree = "<group>"; };
-		7B2638131553360900013EE7 /* AKTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTab.h; sourceTree = "<group>"; };
-		7B2638141553360900013EE7 /* AKTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTab.m; sourceTree = "<group>"; };
-		7B2638151553360900013EE7 /* AKTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTabBar.h; sourceTree = "<group>"; };
-		7B2638161553360900013EE7 /* AKTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTabBar.m; sourceTree = "<group>"; };
-		7B2638171553360900013EE7 /* AKTabBarController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AKTabBarController.bundle; sourceTree = "<group>"; };
-		7B2638181553360900013EE7 /* AKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTabBarController.h; sourceTree = "<group>"; };
-		7B2638191553360900013EE7 /* AKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTabBarController.m; sourceTree = "<group>"; };
-		7B26381A1553360900013EE7 /* AKTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKTabBarView.h; sourceTree = "<group>"; };
-		7B26381B1553360900013EE7 /* AKTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKTabBarView.m; sourceTree = "<group>"; };
-		7B26381C1553360900013EE7 /* UINavigationController+AKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+AKTabBarController.h"; sourceTree = "<group>"; };
-		7B26381D1553360900013EE7 /* UINavigationController+AKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+AKTabBarController.m"; sourceTree = "<group>"; };
-		7B26381E1553360900013EE7 /* UIViewController+AKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AKTabBarController.h"; sourceTree = "<group>"; };
-		7B26381F1553360900013EE7 /* UIViewController+AKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AKTabBarController.m"; sourceTree = "<group>"; };
 		7B26382A155338C400013EE7 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		7B26382B155338C400013EE7 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		7B26382D155338CC00013EE7 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
@@ -79,6 +65,19 @@
 		7B26383A15533B2D00013EE7 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		7B26383C1553412000013EE7 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		7B26383D1553412000013EE7 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		7BEB2499155E8AF50020B3D9 /* AKTab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKTab.h; path = ../../AKTabBarController/AKTab.h; sourceTree = "<group>"; };
+		7BEB249A155E8AF50020B3D9 /* AKTab.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AKTab.m; path = ../../AKTabBarController/AKTab.m; sourceTree = "<group>"; };
+		7BEB249B155E8AF50020B3D9 /* AKTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKTabBar.h; path = ../../AKTabBarController/AKTabBar.h; sourceTree = "<group>"; };
+		7BEB249C155E8AF50020B3D9 /* AKTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AKTabBar.m; path = ../../AKTabBarController/AKTabBar.m; sourceTree = "<group>"; };
+		7BEB249D155E8AF50020B3D9 /* AKTabBarController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AKTabBarController.bundle; path = ../../AKTabBarController/AKTabBarController.bundle; sourceTree = "<group>"; };
+		7BEB249E155E8AF50020B3D9 /* AKTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKTabBarController.h; path = ../../AKTabBarController/AKTabBarController.h; sourceTree = "<group>"; };
+		7BEB249F155E8AF50020B3D9 /* AKTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AKTabBarController.m; path = ../../AKTabBarController/AKTabBarController.m; sourceTree = "<group>"; };
+		7BEB24A0155E8AF50020B3D9 /* AKTabBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKTabBarView.h; path = ../../AKTabBarController/AKTabBarView.h; sourceTree = "<group>"; };
+		7BEB24A1155E8AF50020B3D9 /* AKTabBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AKTabBarView.m; path = ../../AKTabBarController/AKTabBarView.m; sourceTree = "<group>"; };
+		7BEB24A2155E8AF50020B3D9 /* UINavigationController+AKTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+AKTabBarController.h"; path = "../../AKTabBarController/UINavigationController+AKTabBarController.h"; sourceTree = "<group>"; };
+		7BEB24A3155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+AKTabBarController.m"; path = "../../AKTabBarController/UINavigationController+AKTabBarController.m"; sourceTree = "<group>"; };
+		7BEB24A4155E8AF50020B3D9 /* UIViewController+AKTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+AKTabBarController.h"; path = "../../AKTabBarController/UIViewController+AKTabBarController.h"; sourceTree = "<group>"; };
+		7BEB24A5155E8AF50020B3D9 /* UIViewController+AKTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+AKTabBarController.m"; path = "../../AKTabBarController/UIViewController+AKTabBarController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +147,7 @@
 		7B2637F21553340F00013EE7 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				7B263812155335F400013EE7 /* AKTabBarController */,
+				7BEB2497155E8AC10020B3D9 /* AKTabBarController */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -188,22 +187,22 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		7B263812155335F400013EE7 /* AKTabBarController */ = {
+		7BEB2497155E8AC10020B3D9 /* AKTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				7B26381A1553360900013EE7 /* AKTabBarView.h */,
-				7B26381B1553360900013EE7 /* AKTabBarView.m */,
-				7B2638151553360900013EE7 /* AKTabBar.h */,
-				7B2638161553360900013EE7 /* AKTabBar.m */,
-				7B2638131553360900013EE7 /* AKTab.h */,
-				7B2638141553360900013EE7 /* AKTab.m */,
-				7B2638181553360900013EE7 /* AKTabBarController.h */,
-				7B2638191553360900013EE7 /* AKTabBarController.m */,
-				7B26381C1553360900013EE7 /* UINavigationController+AKTabBarController.h */,
-				7B26381D1553360900013EE7 /* UINavigationController+AKTabBarController.m */,
-				7B26381E1553360900013EE7 /* UIViewController+AKTabBarController.h */,
-				7B26381F1553360900013EE7 /* UIViewController+AKTabBarController.m */,
-				7B2638171553360900013EE7 /* AKTabBarController.bundle */,
+				7BEB249E155E8AF50020B3D9 /* AKTabBarController.h */,
+				7BEB249F155E8AF50020B3D9 /* AKTabBarController.m */,
+				7BEB2499155E8AF50020B3D9 /* AKTab.h */,
+				7BEB249A155E8AF50020B3D9 /* AKTab.m */,
+				7BEB249B155E8AF50020B3D9 /* AKTabBar.h */,
+				7BEB249C155E8AF50020B3D9 /* AKTabBar.m */,
+				7BEB24A0155E8AF50020B3D9 /* AKTabBarView.h */,
+				7BEB24A1155E8AF50020B3D9 /* AKTabBarView.m */,
+				7BEB24A2155E8AF50020B3D9 /* UINavigationController+AKTabBarController.h */,
+				7BEB24A3155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m */,
+				7BEB24A4155E8AF50020B3D9 /* UIViewController+AKTabBarController.h */,
+				7BEB24A5155E8AF50020B3D9 /* UIViewController+AKTabBarController.m */,
+				7BEB249D155E8AF50020B3D9 /* AKTabBarController.bundle */,
 			);
 			name = AKTabBarController;
 			sourceTree = "<group>";
@@ -268,7 +267,6 @@
 				7B26380E1553352E00013EE7 /* image-3@2x.png in Resources */,
 				7B26380F1553352E00013EE7 /* image-4.png in Resources */,
 				7B2638101553352E00013EE7 /* image-4@2x.png in Resources */,
-				7B2638221553360900013EE7 /* AKTabBarController.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,14 +277,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BEB24A7155E8AF50020B3D9 /* AKTab.m in Sources */,
+				7BEB24A9155E8AF50020B3D9 /* AKTabBar.m in Sources */,
+				7BEB24AC155E8AF50020B3D9 /* AKTabBarController.m in Sources */,
+				7BEB24AE155E8AF50020B3D9 /* AKTabBarView.m in Sources */,
+				7BEB24B0155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m in Sources */,
+				7BEB24B2155E8AF50020B3D9 /* UIViewController+AKTabBarController.m in Sources */,
 				7B2637E6155333E100013EE7 /* main.m in Sources */,
 				7B2637EA155333E100013EE7 /* AppDelegate.m in Sources */,
-				7B2638201553360900013EE7 /* AKTab.m in Sources */,
-				7B2638211553360900013EE7 /* AKTabBar.m in Sources */,
-				7B2638231553360900013EE7 /* AKTabBarController.m in Sources */,
-				7B2638241553360900013EE7 /* AKTabBarView.m in Sources */,
-				7B2638251553360900013EE7 /* UINavigationController+AKTabBarController.m in Sources */,
-				7B2638261553360900013EE7 /* UIViewController+AKTabBarController.m in Sources */,
 				7B26382C155338C400013EE7 /* SecondViewController.m in Sources */,
 				7B26382F155338CC00013EE7 /* ThirdViewController.m in Sources */,
 				7B263832155338D500013EE7 /* FourthViewController.m in Sources */,

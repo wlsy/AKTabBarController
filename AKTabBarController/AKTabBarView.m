@@ -27,31 +27,44 @@
 @synthesize tabBar = _tabBar;
 @synthesize contentView = _contentView;
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    }
-    return self;
-}
-
 #pragma mark - Setters
 
-- (void)setContentView:(UIView *)contentView {
+- (void)setTabBar:(AKTabBar *)tabBar
+{
+    if (_tabBar != tabBar) {
+        [_tabBar removeFromSuperview];
+        _tabBar = tabBar;
+        [self addSubview:tabBar];
+    }
+}
+
+
+- (void)setContentView:(UIView *)contentView
+{
     [_contentView removeFromSuperview];
     _contentView = contentView;
-    CGRect contentViewRect = CGRectMake(0, 0, self.frame.size.width, self.tabBar.frame.origin.y);
+    CGRect contentViewRect = CGRectMake(0, 0, self.bounds.size.width, self.tabBar.frame.origin.y);
     _contentView.frame = contentViewRect;
     [self addSubview:_contentView];
+    [self sendSubviewToBack:_contentView];
 }
 
-#pragma mark - Layout
+#pragma mark - Layout & Drawing
 
-- (void)layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
-    CGRect contentViewRect = CGRectMake(0, 0, self.frame.size.width, self.tabBar.frame.origin.y);
-    _contentView.frame = contentViewRect;
+    CGRect contentViewRect = CGRectMake(0, 0, self.bounds.size.width, self.tabBar.frame.origin.y);
+    self.contentView.frame = contentViewRect;
+    [self.contentView layoutSubviews];
 }
+
+- (void)drawRect:(CGRect)rect
+{
+	CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(ctx, 230, 230, 230, 1.0);
+	CGContextFillRect(ctx, self.bounds);
+}
+
 
 @end

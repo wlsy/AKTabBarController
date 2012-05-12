@@ -79,22 +79,16 @@ static const int kTabBarHeight = 50;
     [super loadView];
     
     // Creating and adding the tab bar view
-    self.tabBarView = [[AKTabBarView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.view addSubview:self.tabBarView];
-    
-    // Fixes a 1px margin at the bottom
-	CGFloat offset = ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ||
-                      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)) ? 1 : 0;
-    
+    self.tabBarView = [[AKTabBarView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    self.view = self.tabBarView;
+        
     // Creating and adding the tab bar
-    CGRect tabBarRect = CGRectMake(0, self.view.frame.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight + offset);
+    CGRect tabBarRect = CGRectMake(0, self.view.frame.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight + 1);
     self.tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
     self.tabBar.delegate = self;
-    [self.view addSubview:self.tabBar];
     
     self.tabBarView.tabBar = self.tabBar;
     self.tabBarView.contentView = self.selectedViewController.view;
-    
     [self loadTabs];
 }
 
@@ -143,7 +137,7 @@ static const int kTabBarHeight = 50;
         
         if ([vc isKindOfClass:[UINavigationController class]]) {
             
-            [(UINavigationController *)self.selectedViewController popViewControllerAnimated:YES];
+            [(UINavigationController *)self.selectedViewController popToRootViewControllerAnimated:YES];
         }
     
     } else {
