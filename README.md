@@ -41,6 +41,11 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 	return @"Tab";
 }  
 ```
+### Setting the minimum height to display the title
+
+``` objective-c  
+[self.tabBarController setMinimumHeightToDisplayTitle:50];
+```
 
 For further details see the Xcode example project.
 
