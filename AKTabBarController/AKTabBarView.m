@@ -55,7 +55,7 @@
     [super layoutSubviews];
     CGRect contentViewRect = CGRectMake(0, 0, self.bounds.size.width, self.tabBar.frame.origin.y);
     self.contentView.frame = contentViewRect;
-    [self.contentView layoutSubviews];
+    [self.contentView setNeedsLayout];
 }
 
 - (void)drawRect:(CGRect)rect
