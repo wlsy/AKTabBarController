@@ -6,7 +6,7 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 ##Features
 - Portrait and Landscape mode tab bar.
 - Ability to set the height of the tab bar.
-- When the height of the tab bar is too small (inferior to 35px), the title is not displayed. 
+- When the height of the tab bar is too small, the title is not displayed.
 - Only one image is needed for both selected and unselected states (style is added via CoreGraphics).
 - Images are resized when needed and particularly in landscape mode.
 - Animated state of the tabs with a nice cross fade animation.
@@ -22,8 +22,7 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
                                               [[FirstViewController alloc] init],
                                               [[SecondViewController alloc] init],
                                               [[ThirdViewController alloc] init],
-                                              [[FourthViewController alloc] init],nil]
-    ];  
+                                              [[FourthViewController alloc] init],nil]];  
 ```
 ### Setting the title and image
 (in each view controller)
@@ -45,6 +44,12 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 
 ``` objective-c  
 [self.tabBarController setMinimumHeightToDisplayTitle:50];
+```
+
+### Hide the tab title
+
+``` objective-c  
+[self.tabBarController setTabTitleIsHidden:NO];
 ```
 
 For further details see the Xcode example project.
@@ -70,8 +75,10 @@ For further details see the Xcode example project.
 
 ##Todo
 - ~~Ability to set the minimum height of the tab bar to display the title.~~
-- Support different styles (dark, light, etc).
 - Ability to set any background pattern.
+- Support different styles (dark, light, etc).
+- Ability to hide the tab bar when pushed.
+- Ability to always hide the title in the tabs.
 
 ##Credits
 - Largely inspired by **Brian Collins**'s [BCTabBarController](https://github.com/briancollins/BCTabBarController) (for views imbrication).

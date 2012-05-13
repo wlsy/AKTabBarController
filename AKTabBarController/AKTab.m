@@ -25,9 +25,6 @@
 // cross fade animation duration.
 static const float kAnimationDuration = 0.15;
 
-// Default minimum height that permits the display of the tab's title.
-static const float kDefaultMinimumHeightTodisplayTabTitle = 35.0;
-
 // Padding of the content
 static const float kPadding = 4.0;
 
@@ -42,14 +39,11 @@ static const float kTopMargin = 2.0;
 // Permits the cross fade animation between the two images, duration in seconds.
 - (void)animateContentWithDuration:(CFTimeInterval)duration;
 
-// Inverted CGContextClipToMask.
-- (void)AKContectClipToMask:(UIImage *)image rect:(CGRect)rect context:(CGContextRef)context offset:(CGPoint)offset;
-
 @end
 
 @implementation AKTab
 
-@synthesize tabImageWithName, tabTitle, minimumHeightToDisplayTitle;
+@synthesize tabImageWithName, tabTitle, minimumHeightToDisplayTitle, titleIsHidden;
 
 #pragma mark - Initialization
 
@@ -59,7 +53,7 @@ static const float kTopMargin = 2.0;
     if (self) {
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.backgroundColor = [UIColor clearColor];
-        self.minimumHeightToDisplayTitle = kDefaultMinimumHeightTodisplayTabTitle;
+        self.titleIsHidden = NO;
     }
     return self;
 }
@@ -84,15 +78,21 @@ static const float kTopMargin = 2.0;
 
 #pragma mark - Drawing
 
-- (void)AKContectClipToMask:(UIImage *)image rect:(CGRect)rect context:(CGContextRef)context offset:(CGPoint)offset
-{
-    CGContextTranslateCTM(context, offset.x, offset.y);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    CGContextClipToMask(context, rect, image.CGImage);
-}
-
 - (void)drawRect:(CGRect)rect
 {
+    // If the height of the container is too short, we do not display the title
+    CGFloat offset = 1.0;
+    
+    if (!self.minimumHeightToDisplayTitle) {
+        self.minimumHeightToDisplayTitle = CGRectGetHeight(rect) - offset;
+    }
+    
+    BOOL displayTabTitle = (CGRectGetHeight(rect) - offset >= self.minimumHeightToDisplayTitle) ? YES : NO;
+    
+    if (self.titleIsHidden) {
+        displayTabTitle = NO;
+    }
+    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
     // Container, basically centered in rect
@@ -118,10 +118,6 @@ static const float kTopMargin = 2.0;
     
     CGRect labelRect = CGRectZero;
     
-    // If the height of the container is too short, we do not display the title
-    CGFloat offset = 1.0;
-    BOOL displayTabTitle = (CGRectGetHeight(rect) - offset >= self.minimumHeightToDisplayTitle) ? YES : NO;
-        
     labelRect.size.height = (displayTabTitle) ? labelSize.height : 0;
     
     // Container of the image + label (when there is room)

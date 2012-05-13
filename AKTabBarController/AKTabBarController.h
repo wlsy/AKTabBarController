@@ -32,6 +32,9 @@
 // This is the minimum height to display the title.
 @property (nonatomic, assign) CGFloat minimumHeightToDisplayTitle;
 
+// Used to show / hide the tabs title.
+@property (nonatomic, assign) BOOL tabTitleIsHidden;
+
 // Initialization with a specific height.
 - (id)initWithTabBarHeight:(NSUInteger)height;
 

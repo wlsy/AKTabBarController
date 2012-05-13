@@ -30,6 +30,10 @@
 // Tabs title.
 @property (nonatomic, strong) NSString *tabTitle;
 
+// Minimum height that permits the display of the tab's title.
 @property (nonatomic, assign) CGFloat minimumHeightToDisplayTitle;
+
+// Used to show / hide title.
+@property (nonatomic, assign) BOOL titleIsHidden;
 
 @end

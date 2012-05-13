@@ -51,7 +51,7 @@ static const int kDefaultTabBarHeight = 50;
 @synthesize selectedViewController = _selectedViewController;
 
 // Public properties
-@synthesize minimumHeightToDisplayTitle;
+@synthesize minimumHeightToDisplayTitle, tabTitleIsHidden;
 @synthesize viewControllers = _viewControllers;
 
 #pragma mark - Initialization
@@ -107,6 +107,10 @@ static const int kDefaultTabBarHeight = 50;
         
         if (self.minimumHeightToDisplayTitle) {
             [tab setMinimumHeightToDisplayTitle:self.minimumHeightToDisplayTitle];
+        }
+        
+        if (self.tabTitleIsHidden) {
+            [tab setTitleIsHidden:YES];
         }
         
         [tabs addObject:tab];
