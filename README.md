@@ -64,7 +64,7 @@ For further details see the Xcode example project.
 ![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/ipad-landscape.png)
 
 ##Todo
-- Ability to set the minimum height of the tab bar to display the title.
+- ~~Ability to set the minimum height of the tab bar to display the title.~~
 - Support different styles (dark, light, etc).
 - Ability to set any background pattern.
 
