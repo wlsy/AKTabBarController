@@ -29,6 +29,9 @@
 // View Controllers handled by the tab bar controller.
 @property (nonatomic, strong) NSMutableArray *viewControllers;
 
+// This is the minimum height to display the title.
+@property (nonatomic, assign) CGFloat minimumHeightToDisplayTitle;
+
 // Initialization with a specific height.
 - (id)initWithTabBarHeight:(NSUInteger)height;
 

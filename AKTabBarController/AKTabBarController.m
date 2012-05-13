@@ -24,7 +24,7 @@
 #import "UIViewController+AKTabBarController.h"
 
 // Default height of the tab bar
-static const int kTabBarHeight = 50;
+static const int kDefaultTabBarHeight = 50;
 
 @interface AKTabBarController ()
 
@@ -51,6 +51,7 @@ static const int kTabBarHeight = 50;
 @synthesize selectedViewController = _selectedViewController;
 
 // Public properties
+@synthesize minimumHeightToDisplayTitle;
 @synthesize viewControllers = _viewControllers;
 
 #pragma mark - Initialization
@@ -60,7 +61,7 @@ static const int kTabBarHeight = 50;
     self = [super init];
     if (self) {
         // Setting the default tab bar height
-        self.tabBarHeight = kTabBarHeight;
+        self.tabBarHeight = kDefaultTabBarHeight;
     }
     return self;
 }
@@ -83,7 +84,11 @@ static const int kTabBarHeight = 50;
     self.view = self.tabBarView;
         
     // Creating and adding the tab bar
-    CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight);
+    
+    // After the device rotation, the height is changing, this fixes it.
+    CGFloat offset = 1;
+    
+    CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight + offset);
     self.tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
     self.tabBar.delegate = self;
     
@@ -99,6 +104,11 @@ static const int kTabBarHeight = 50;
         AKTab *tab = [[AKTab alloc] init];
         [tab setTabImageWithName:[vc tabImageName]];
         [tab setTabTitle:[vc tabTitle]];
+        
+        if (self.minimumHeightToDisplayTitle) {
+            [tab setMinimumHeightToDisplayTitle:self.minimumHeightToDisplayTitle];
+        }
+        
         [tabs addObject:tab];
     }
     [self.tabBar setTabs:tabs];
@@ -161,13 +171,6 @@ static const int kTabBarHeight = 50;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
 
-    // In landscape mode, a 1px offset appears at the botton. This solves it
-    if (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-        CGRect tabBarRect = self.tabBar.frame;
-        tabBarRect.origin.y = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(tabBarRect);
-        self.tabBar.frame = tabBarRect;
-    }
-    
     // Redraw with will rotating and keeping the aspect ratio
     for (AKTab *tab in [self.tabBar tabs]) {
         [tab setNeedsDisplay];

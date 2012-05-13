@@ -30,4 +30,6 @@
 // Tabs title.
 @property (nonatomic, strong) NSString *tabTitle;
 
+@property (nonatomic, assign) CGFloat minimumHeightToDisplayTitle;
+
 @end

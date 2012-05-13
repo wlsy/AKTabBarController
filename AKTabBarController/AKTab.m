@@ -25,11 +25,16 @@
 // cross fade animation duration.
 static const float kAnimationDuration = 0.15;
 
-// Minimum height that permits the display of the tab's title.
-static const float kMinimumHeightTodisplayTabTitle = 35.0;
+// Default minimum height that permits the display of the tab's title.
+static const float kDefaultMinimumHeightTodisplayTabTitle = 35.0;
 
+// Padding of the content
 static const float kPadding = 4.0;
+
+// Margin between the image and the title
 static const float kMargin = 2.0;
+
+// Margin at the top
 static const float kTopMargin = 2.0;
 
 @interface AKTab ()
@@ -44,7 +49,7 @@ static const float kTopMargin = 2.0;
 
 @implementation AKTab
 
-@synthesize tabImageWithName, tabTitle;
+@synthesize tabImageWithName, tabTitle, minimumHeightToDisplayTitle;
 
 #pragma mark - Initialization
 
@@ -54,6 +59,7 @@ static const float kTopMargin = 2.0;
     if (self) {
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.backgroundColor = [UIColor clearColor];
+        self.minimumHeightToDisplayTitle = kDefaultMinimumHeightTodisplayTabTitle;
     }
     return self;
 }
@@ -113,8 +119,9 @@ static const float kTopMargin = 2.0;
     CGRect labelRect = CGRectZero;
     
     // If the height of the container is too short, we do not display the title
-    BOOL displayTabTitle = (CGRectGetHeight(container) >= kMinimumHeightTodisplayTabTitle) ? YES : NO;
-    
+    CGFloat offset = 1.0;
+    BOOL displayTabTitle = (CGRectGetHeight(rect) - offset >= self.minimumHeightToDisplayTitle) ? YES : NO;
+        
     labelRect.size.height = (displayTabTitle) ? labelSize.height : 0;
     
     // Container of the image + label (when there is room)
