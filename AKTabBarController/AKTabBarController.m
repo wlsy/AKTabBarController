@@ -27,6 +27,7 @@
 static const int kDefaultTabBarHeight = 50;
 
 @interface AKTabBarController ()
+    BOOL visible;
 
 // Bottom tab bar view
 @property (nonatomic, strong) AKTabBar *tabBar;
@@ -89,6 +90,7 @@ static const int kDefaultTabBarHeight = 50;
     CGFloat offset = 1;
     
     CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight + offset);
+    CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.bounds.size.width, self.tabBarHeight + offset);
     self.tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
     self.tabBar.delegate = self;
     
@@ -134,12 +136,27 @@ static const int kDefaultTabBarHeight = 50;
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
 {
     
+    UIViewController *previousSelectedViewController = selectedViewController;
     if (self.selectedViewController != selectedViewController) {
         _selectedViewController = selectedViewController;
+        
+        selectedViewController = selectedViewController;
+        if (!self.childViewControllers && visible) {
+			[previousSelectedViewController viewWillDisappear:NO];
+			[selectedViewController viewWillAppear:NO];
+		}
+
         [self.tabBarView setContentView:selectedViewController.view];
+        
+        if (!self.childViewControllers && visible) {
+			[previousSelectedViewController viewDidDisappear:NO];
+			[selectedViewController viewDidAppear:NO];
+		}
+        
         [self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:[self.viewControllers indexOfObject:selectedViewController]]];
     }
 }
+
 
 #pragma mark - Required Protocol Method
 
@@ -186,6 +203,45 @@ static const int kDefaultTabBarHeight = 50;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [self.selectedViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+}
+
+@end
+#pragma mark - ViewController Life cycle
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+    
+    if (!self.childViewControllers)
+        [self.selectedViewController viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+    
+    if (!self.childViewControllers)
+        [self.selectedViewController viewDidAppear:animated];
+    
+    visible = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+    
+    if (!self.childViewControllers)
+        [self.selectedViewController viewWillDisappear:animated];	
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+    
+    if (![self respondsToSelector:@selector(addChildViewController:)])
+        [self.selectedViewController viewDidDisappear:animated];
+    
+    visible = NO;
 }
 
 @end

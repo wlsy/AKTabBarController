@@ -34,5 +34,4 @@
 	return [[self.viewControllers objectAtIndex:0] tabTitle];
 }
 
-
 @end
