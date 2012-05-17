@@ -26,8 +26,19 @@
 // Default height of the tab bar
 static const int kDefaultTabBarHeight = 50;
 
+// Default Push animation duration
+static const float kPushAnimationDuration = 0.35;
+
 @interface AKTabBarController ()
+{
+    NSArray *prevViewControllers;
     BOOL visible;
+}
+
+typedef enum {
+    AKShowHideFromLeft,
+    AKShowHideFromRight
+} AKShowHideFrom;
 
 // Bottom tab bar view
 @property (nonatomic, strong) AKTabBar *tabBar;
@@ -83,13 +94,12 @@ static const int kDefaultTabBarHeight = 50;
     // Creating and adding the tab bar view
     self.tabBarView = [[AKTabBarView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
     self.view = self.tabBarView;
-        
+    
     // Creating and adding the tab bar
     
     // After the device rotation, the height is changing, this fixes it.
     CGFloat offset = 1;
     
-    CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.frame.size.width, self.tabBarHeight + offset);
     CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.bounds.size.width, self.tabBarHeight + offset);
     self.tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
     self.tabBar.delegate = self;
@@ -103,6 +113,7 @@ static const int kDefaultTabBarHeight = 50;
 {
     NSMutableArray *tabs = [[NSMutableArray alloc] init];
     for (UIViewController *vc in self.viewControllers) {
+                        
         AKTab *tab = [[AKTab alloc] init];
         [tab setTabImageWithName:[vc tabImageName]];
         [tab setTabTitle:[vc tabTitle]];
@@ -114,6 +125,15 @@ static const int kDefaultTabBarHeight = 50;
         if (self.tabTitleIsHidden) {
             [tab setTitleIsHidden:YES];
         }
+   
+        if ([[vc class] isSubclassOfClass:[UINavigationController class]])
+        {
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(viewControllerChanged:)
+                                                         name:@"UINavigationControllerWillShowViewControllerNotification"
+                                                       object:(UINavigationController *)vc];
+
+        }
         
         [tabs addObject:tab];
     }
@@ -123,19 +143,119 @@ static const int kDefaultTabBarHeight = 50;
     [self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:0]];
 }
 
+- (void)viewControllerChanged:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    
+    // This prevent the root view controller to automatically hide the tab bar
+    if ([userInfo objectForKey:@"UINavigationControllerLastVisibleViewController"] == nil)
+        return;
+    
+    BOOL isPreviousHidden = [[userInfo objectForKey:@"UINavigationControllerLastVisibleViewController"] hidesBottomBarWhenPushed];
+    BOOL isNextHidden = [[userInfo objectForKey:@"UINavigationControllerNextVisibleViewController"] hidesBottomBarWhenPushed];
+    
+    UINavigationController *navigationController = (UINavigationController *)self.selectedViewController;
+
+    BOOL pushed;
+    
+    if (!prevViewControllers) {
+        prevViewControllers = [navigationController viewControllers];
+    }
+    
+    if ([prevViewControllers count] <= [[navigationController viewControllers] count]) {
+        pushed = YES;
+    } else {
+        pushed = NO;
+    }
+    
+    prevViewControllers = [navigationController viewControllers];
+    
+    if (!isPreviousHidden && !isNextHidden)
+    {
+        return;
+    }
+    else if (!isPreviousHidden && isNextHidden)
+    {
+        [self hideTabBar:(pushed ? AKShowHideFromRight : AKShowHideFromLeft)];
+    }
+    else if (isPreviousHidden && !isNextHidden)
+    {
+        [self showTabBar:(pushed ? AKShowHideFromRight : AKShowHideFromLeft)];
+    }
+    else if (isPreviousHidden && isNextHidden)
+    {
+        return;
+    }
+}
+
+- (void)showTabBar:(AKShowHideFrom)showHideFrom
+{
+    
+    CGFloat directionVector;
+    
+    switch (showHideFrom) {
+        case AKShowHideFromLeft:
+            directionVector = -1.0;
+            break;
+        case AKShowHideFromRight:
+            directionVector = 1.0;
+            break;
+        default:
+            break;
+    }
+    
+    self.tabBar.hidden = NO;
+    self.tabBar.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width * directionVector, 0);
+    
+    [UIView animateWithDuration:kPushAnimationDuration animations:^{
+        self.tabBar.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        self.tabBarView.isTabBarHidding = NO;
+        [self.tabBarView setNeedsLayout];
+    }];
+}
+
+- (void)hideTabBar:(AKShowHideFrom)showHideFrom
+{
+    
+    CGFloat directionVector;
+    switch (showHideFrom) {
+        case AKShowHideFromLeft:
+            directionVector = 1.0;
+            break;
+        case AKShowHideFromRight:
+            directionVector = -1.0;
+            break;
+        default:
+            break;
+    }
+    
+    self.tabBarView.isTabBarHidding = YES;
+    
+    CGRect tmpTabBarView = self.tabBarView.contentView.frame;
+    tmpTabBarView.size.height = self.tabBarView.bounds.size.height;
+    self.tabBarView.contentView.frame = tmpTabBarView;
+    
+    [UIView animateWithDuration:kPushAnimationDuration animations:^{
+        self.tabBar.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width * directionVector, 0);
+    } completion:^(BOOL finished) {
+        self.tabBar.hidden = YES;
+        self.tabBar.transform = CGAffineTransformIdentity;
+    }];
+}
+
 #pragma mark - Setters
 
 - (void)setViewControllers:(NSMutableArray *)viewControllers
 {
     _viewControllers = viewControllers;
-    
+        
     // When setting the view controllers, the first vc is the selected one;
     [self setSelectedViewController:[viewControllers objectAtIndex:0]];
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
 {
-    
     UIViewController *previousSelectedViewController = selectedViewController;
     if (self.selectedViewController != selectedViewController) {
         _selectedViewController = selectedViewController;
@@ -205,7 +325,6 @@ static const int kDefaultTabBarHeight = 50;
     [self.selectedViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
-@end
 #pragma mark - ViewController Life cycle
 
 - (void)viewWillAppear:(BOOL)animated

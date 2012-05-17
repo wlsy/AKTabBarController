@@ -26,7 +26,7 @@
 
 @synthesize tabBar = _tabBar;
 @synthesize contentView = _contentView;
-
+@synthesize isTabBarHidding;
 #pragma mark - Setters
 
 - (void)setTabBar:(AKTabBar *)tabBar
@@ -53,7 +53,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGRect contentViewRect = CGRectMake(0, 0, self.bounds.size.width, self.tabBar.frame.origin.y);
+    CGRect contentViewRect = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - ((!isTabBarHidding) ? self.tabBar.bounds.size.height : 0));
     self.contentView.frame = contentViewRect;
     [self.contentView setNeedsLayout];
 }
