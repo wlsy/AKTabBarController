@@ -137,7 +137,7 @@ static int kInterTabMargin = 1;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     CGFloat screenWidth = self.bounds.size.width;
     
     CGFloat tabNumber = self.tabs.count;
@@ -167,15 +167,17 @@ static int kInterTabMargin = 1;
         }
         
         if ([self.tabs indexOfObject:tab] == 0) {
-            tab.frame = tab.frame = CGRectMake(rect.origin.x, rect.origin.y, dTabWith, rect.size.height);
+            tab.frame = CGRectMake(rect.origin.x, rect.origin.y, dTabWith, rect.size.height);
         } else {
-            tab.frame = tab.frame = CGRectMake(rect.origin.x + kInterTabMargin, rect.origin.y, dTabWith, rect.size.height);
+            tab.frame = CGRectMake(rect.origin.x + kInterTabMargin, rect.origin.y, dTabWith, rect.size.height);
         }
-                
+        
         [self addSubview:tab];
         rect.origin.x = tab.frame.origin.x + tab.frame.size.width;
     }
     
 }
+
+#pragma mark - Hide & Show
 
 @end
