@@ -91,8 +91,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     FirstViewController *firstViewController = [[FirstViewController alloc] initWithStyle:UITableViewStylePlain];
-     [self.navigationController pushViewController:firstViewController animated:YES];
+    FirstViewController *firstViewController = [[FirstViewController alloc] initWithStyle:UITableViewStylePlain];
+    [firstViewController setHidesBottomBarWhenPushed:(BOOL)([indexPath row] % 2)];
+    [self.navigationController pushViewController:firstViewController animated:YES];
 }
 
 @end
