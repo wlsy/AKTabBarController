@@ -53,6 +53,8 @@ typedef enum {
 @property (nonatomic, assign) NSUInteger tabBarHeight;
 
 - (void)loadTabs;
+- (void)showTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated;
+- (void)hideTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated;
 
 @end
 
@@ -126,13 +128,8 @@ typedef enum {
             [tab setTitleIsHidden:YES];
         }
    
-        if ([[vc class] isSubclassOfClass:[UINavigationController class]])
-        {
-            [[NSNotificationCenter defaultCenter] addObserver:self
-                                                     selector:@selector(viewControllerChanged:)
-                                                         name:@"UINavigationControllerWillShowViewControllerNotification"
-                                                       object:(UINavigationController *)vc];
-
+        if ([[vc class] isSubclassOfClass:[UINavigationController class]]) {
+            ((UINavigationController *)vc).delegate = self;
         }
         
         [tabs addObject:tab];
@@ -143,30 +140,31 @@ typedef enum {
     [self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:0]];
 }
 
-- (void)viewControllerChanged:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-    
-    // This prevent the root view controller to automatically hide the tab bar
-    if ([userInfo objectForKey:@"UINavigationControllerLastVisibleViewController"] == nil)
-        return;
-    
-    BOOL isPreviousHidden = [[userInfo objectForKey:@"UINavigationControllerLastVisibleViewController"] hidesBottomBarWhenPushed];
-    BOOL isNextHidden = [[userInfo objectForKey:@"UINavigationControllerNextVisibleViewController"] hidesBottomBarWhenPushed];
-    
-    UINavigationController *navigationController = (UINavigationController *)self.selectedViewController;
+#pragma - UINavigationControllerDelegate
 
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (!prevViewControllers)
+        prevViewControllers = [navigationController viewControllers];
+    
+    
+    // We detect is the view as been push or popped
     BOOL pushed;
     
-    if (!prevViewControllers) {
-        prevViewControllers = [navigationController viewControllers];
-    }
-    
-    if ([prevViewControllers count] <= [[navigationController viewControllers] count]) {
+    if ([prevViewControllers count] <= [[navigationController viewControllers] count])
+    {
         pushed = YES;
-    } else {
+    }
+    else
+    {
         pushed = NO;
     }
+    
+    // Logic to know when to show or hide the tab bar
+    BOOL isPreviousHidden, isNextHidden;
+    
+    isPreviousHidden = [[prevViewControllers lastObject] hidesBottomBarWhenPushed];
+    isNextHidden = [viewController hidesBottomBarWhenPushed];
     
     prevViewControllers = [navigationController viewControllers];
     
@@ -176,11 +174,11 @@ typedef enum {
     }
     else if (!isPreviousHidden && isNextHidden)
     {
-        [self hideTabBar:(pushed ? AKShowHideFromRight : AKShowHideFromLeft)];
+        [self hideTabBar:(pushed ? AKShowHideFromRight : AKShowHideFromLeft) animated:animated];
     }
     else if (isPreviousHidden && !isNextHidden)
     {
-        [self showTabBar:(pushed ? AKShowHideFromRight : AKShowHideFromLeft)];
+        [self showTabBar:(pushed ? AKShowHideFromRight : AKShowHideFromLeft) animated:animated];
     }
     else if (isPreviousHidden && isNextHidden)
     {
@@ -188,7 +186,7 @@ typedef enum {
     }
 }
 
-- (void)showTabBar:(AKShowHideFrom)showHideFrom
+- (void)showTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated
 {
     
     CGFloat directionVector;
@@ -215,7 +213,7 @@ typedef enum {
     }];
 }
 
-- (void)hideTabBar:(AKShowHideFrom)showHideFrom
+- (void)hideTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated
 {
     
     CGFloat directionVector;

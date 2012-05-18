@@ -24,7 +24,7 @@
 #import "AKTabBar.h"
 #import "AKTab.h"
 
-@interface AKTabBarController : UIViewController <AKTabBarDelegate>
+@interface AKTabBarController : UIViewController <AKTabBarDelegate, UINavigationControllerDelegate>
 
 // View Controllers handled by the tab bar controller.
 @property (nonatomic, strong) NSMutableArray *viewControllers;
