@@ -6,10 +6,14 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 ##Features
 - Portrait and Landscape mode tab bar.
 - Ability to set the height of the tab bar.
+- Ability to hide the tab bar when pushed.
+- Ability to set the minimum height of the tab bar to allow display the title.
+- Ability to hide the title in the tabs.
 - When the height of the tab bar is too small, the title is not displayed.
 - Only one image is needed for both selected and unselected states (style is added via CoreGraphics).
 - Images are resized when needed and particularly in landscape mode.
 - Animated state of the tabs with a nice cross fade animation.
+
 
 ##Usage
 ### Creation and initialization of the tab bar
@@ -27,7 +31,7 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 ### Setting the title and image
 (in each view controller)
 
-``` objective-c  
+``` objective-c
 // Setting the image of the tab.
 - (NSString *)tabImageName
 {
@@ -38,8 +42,9 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 - (NSString *)tabTitle
 {
 	return @"Tab";
-}  
+}
 ```
+
 ### Setting the minimum height to display the title
 
 ``` objective-c  
@@ -51,7 +56,13 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 ``` objective-c  
 [self.tabBarController setTabTitleIsHidden:NO];
 ```
+### Hide the tab bar when pushed in an UINavigationController
+When pushing a viewcontroller in the viewControllers stack of an UINavigationController it is possible to hide the tab bar. It works exactely like the original UITabBarController:
 
+``` objective-c
+[viewController setHidesBottomBarWhenPushed:YES];
+```
+  
 For further details see the Xcode example project.
 
 ##Requirements
@@ -76,9 +87,6 @@ For further details see the Xcode example project.
 ##Todo
 - Ability to set any background pattern.
 - Support different styles (dark, light, etc).
-- Ability to hide the tab bar when pushed.
-- ~~Ability to set the minimum height of the tab bar to display the title.~~
-- ~~Ability to always hide the title in the tabs.~~
 
 ##Credits
 - Largely inspired by **Brian Collins**'s [BCTabBarController](https://github.com/briancollins/BCTabBarController) (for views imbrication).
