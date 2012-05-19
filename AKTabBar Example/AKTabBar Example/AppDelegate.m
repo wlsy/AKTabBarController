@@ -15,8 +15,8 @@
 #import "FourthViewController.h"
 
 @implementation AppDelegate
-
-@synthesize tabBarController = _tabBarController;
+@synthesize window;
+@synthesize tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
