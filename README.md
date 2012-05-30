@@ -66,7 +66,7 @@ When pushing a viewcontroller in the viewControllers stack of an UINavigationCon
 For further details see the Xcode example project.
 
 ##Requirements
-- iOS 5.x
+- iOS >= 4.3
 - ARC
 - QuartzCore.framework
 
