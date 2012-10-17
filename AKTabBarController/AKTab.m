@@ -43,8 +43,6 @@ static const float kTopMargin = 2.0;
 
 @implementation AKTab
 
-@synthesize tabImageWithName, tabTitle, minimumHeightToDisplayTitle, titleIsHidden;
-
 #pragma mark - Initialization
 
 - (id)init
@@ -53,7 +51,7 @@ static const float kTopMargin = 2.0;
     if (self) {
         self.contentMode = UIViewContentModeScaleAspectFit;
         self.backgroundColor = [UIColor clearColor];
-        self.titleIsHidden = NO;
+        _titleIsHidden = NO;
     }
     return self;
 }
@@ -83,13 +81,12 @@ static const float kTopMargin = 2.0;
     // If the height of the container is too short, we do not display the title
     CGFloat offset = 1.0;
     
-    if (!self.minimumHeightToDisplayTitle) {
-        self.minimumHeightToDisplayTitle = CGRectGetHeight(rect) - offset;
-    }
+    if (!_minimumHeightToDisplayTitle)
+        _minimumHeightToDisplayTitle = _tabBarHeight - offset;
     
-    BOOL displayTabTitle = (CGRectGetHeight(rect) - offset >= self.minimumHeightToDisplayTitle) ? YES : NO;
+    BOOL displayTabTitle = (CGRectGetHeight(rect) + offset >= _minimumHeightToDisplayTitle) ? YES : NO;
     
-    if (self.titleIsHidden) {
+    if (_titleIsHidden) {
         displayTabTitle = NO;
     }
     
@@ -101,7 +98,7 @@ static const float kTopMargin = 2.0;
     container.origin.y += kTopMargin;
     
     // Tab's image
-    UIImage *image = [UIImage imageNamed:self.tabImageWithName];
+    UIImage *image = [UIImage imageNamed:_tabImageWithName];
     
     // Getting the ratio for eventual scaling
     CGFloat ratio = image.size.width / image.size.height;
@@ -112,7 +109,7 @@ static const float kTopMargin = 2.0;
     
     // Title label
     UILabel *tabTitleLabel = [[UILabel alloc] init];
-    tabTitleLabel.text = self.tabTitle;
+    tabTitleLabel.text = _tabTitle;
     tabTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11.0];
     CGSize labelSize = [tabTitleLabel.text sizeWithFont:tabTitleLabel.font forWidth:CGRectGetWidth(rect) lineBreakMode:UILineBreakModeMiddleTruncation];
     

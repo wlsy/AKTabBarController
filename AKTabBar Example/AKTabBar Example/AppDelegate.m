@@ -34,10 +34,9 @@
                                                navigationController,
                                                [[SecondViewController alloc] init],
                                                [[ThirdViewController alloc] init],
-                                               [[FourthViewController alloc] init],nil]
-     ];
+                                               [[FourthViewController alloc] init],nil]];
     
-    [self.window addSubview:self.tabBarController.view];
+    [self.window setRootViewController:self.tabBarController];
     [self.window makeKeyAndVisible];
     return YES;
 }

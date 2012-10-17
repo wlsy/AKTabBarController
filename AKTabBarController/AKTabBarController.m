@@ -40,17 +40,8 @@ typedef enum {
     AKShowHideFromRight
 } AKShowHideFrom;
 
-// Bottom tab bar view
-@property (nonatomic, strong) AKTabBar *tabBar;
-
-// Content view
-@property (nonatomic, strong) AKTabBarView *tabBarView;
-
 // Current active view controller
 @property (nonatomic, strong) UIViewController *selectedViewController;
-
-// Tab Bar height
-@property (nonatomic, assign) NSUInteger tabBarHeight;
 
 - (void)loadTabs;
 - (void)showTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated;
@@ -59,14 +50,16 @@ typedef enum {
 @end
 
 @implementation AKTabBarController
-
-// Private properties
-@synthesize tabBar, tabBarView, tabBarHeight;
-@synthesize selectedViewController = _selectedViewController;
-
-// Public properties
-@synthesize minimumHeightToDisplayTitle, tabTitleIsHidden;
-@synthesize viewControllers = _viewControllers;
+{
+    // Bottom tab bar view
+    AKTabBar *tabBar;
+    
+    // Content view
+    AKTabBarView *tabBarView;
+    
+    // Tab Bar height
+    NSUInteger tabBarHeight;
+}
 
 #pragma mark - Initialization
 
@@ -75,7 +68,7 @@ typedef enum {
     self = [super init];
     if (self) {
         // Setting the default tab bar height
-        self.tabBarHeight = kDefaultTabBarHeight;
+        tabBarHeight = kDefaultTabBarHeight;
     }
     return self;
 }
@@ -84,7 +77,7 @@ typedef enum {
 {
     self = [super init];
     if (self) {
-        self.tabBarHeight = height;
+        tabBarHeight = height;
     }
     return self;
 }
@@ -94,20 +87,20 @@ typedef enum {
     [super loadView];
     
     // Creating and adding the tab bar view
-    self.tabBarView = [[AKTabBarView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    self.view = self.tabBarView;
+    tabBarView = [[AKTabBarView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    self.view = tabBarView;
     
     // Creating and adding the tab bar
     
     // After the device rotation, the height is changing, this fixes it.
-    CGFloat offset = 1;
+    CGFloat offset = 1.0;
     
-    CGRect tabBarRect = CGRectMake(0, self.view.bounds.size.height - self.tabBarHeight, self.view.bounds.size.width, self.tabBarHeight + offset);
-    self.tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
-    self.tabBar.delegate = self;
+    CGRect tabBarRect = CGRectMake(0.0, self.view.bounds.size.height - tabBarHeight, CGRectGetWidth(self.view.frame), tabBarHeight + offset);
+    tabBar = [[AKTabBar alloc] initWithFrame:tabBarRect];
+    tabBar.delegate = self;
     
-    self.tabBarView.tabBar = self.tabBar;
-    self.tabBarView.contentView = self.selectedViewController.view;
+    tabBarView.tabBar = tabBar;
+    tabBarView.contentView = _selectedViewController.view;
     [self loadTabs];
 }
 
@@ -120,11 +113,13 @@ typedef enum {
         [tab setTabImageWithName:[vc tabImageName]];
         [tab setTabTitle:[vc tabTitle]];
         
-        if (self.minimumHeightToDisplayTitle) {
-            [tab setMinimumHeightToDisplayTitle:self.minimumHeightToDisplayTitle];
+        [tab setTabBarHeight:tabBarHeight];
+        
+        if (_minimumHeightToDisplayTitle) {
+            [tab setMinimumHeightToDisplayTitle:_minimumHeightToDisplayTitle];
         }
         
-        if (self.tabTitleIsHidden) {
+        if (_tabTitleIsHidden) {
             [tab setTitleIsHidden:YES];
         }
    
@@ -134,10 +129,10 @@ typedef enum {
         
         [tabs addObject:tab];
     }
-    [self.tabBar setTabs:tabs];
+    [tabBar setTabs:tabs];
     
     // Setting the first view controller as the active one
-    [self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:0]];
+    [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:0]];
 }
 
 #pragma - UINavigationControllerDelegate
@@ -202,14 +197,14 @@ typedef enum {
             break;
     }
     
-    self.tabBar.hidden = NO;
-    self.tabBar.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width * directionVector, 0);
+    tabBar.hidden = NO;
+    tabBar.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.view.frame) * directionVector, 0);
     
     [UIView animateWithDuration:((animated) ? kPushAnimationDuration : 0) animations:^{
-        self.tabBar.transform = CGAffineTransformIdentity;
+        tabBar.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
-        self.tabBarView.isTabBarHidding = NO;
-        [self.tabBarView setNeedsLayout];
+        tabBarView.isTabBarHidding = NO;
+        [tabBarView setNeedsLayout];
     }];
 }
 
@@ -228,17 +223,17 @@ typedef enum {
             break;
     }
     
-    self.tabBarView.isTabBarHidding = YES;
+    tabBarView.isTabBarHidding = YES;
     
-    CGRect tmpTabBarView = self.tabBarView.contentView.frame;
-    tmpTabBarView.size.height = self.tabBarView.bounds.size.height;
-    self.tabBarView.contentView.frame = tmpTabBarView;
+    CGRect tmpTabBarView = tabBarView.contentView.frame;
+    tmpTabBarView.size.height = tabBarView.bounds.size.height;
+    tabBarView.contentView.frame = tmpTabBarView;
     
     [UIView animateWithDuration:((animated) ? kPushAnimationDuration : 0) animations:^{
-        self.tabBar.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width * directionVector, 0);
+        tabBar.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.view.frame) * directionVector, 0);
     } completion:^(BOOL finished) {
-        self.tabBar.hidden = YES;
-        self.tabBar.transform = CGAffineTransformIdentity;
+        tabBar.hidden = YES;
+        tabBar.transform = CGAffineTransformIdentity;
     }];
 }
 
@@ -255,7 +250,7 @@ typedef enum {
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
 {
     UIViewController *previousSelectedViewController = selectedViewController;
-    if (self.selectedViewController != selectedViewController) {
+    if (_selectedViewController != selectedViewController) {
         _selectedViewController = selectedViewController;
         
         selectedViewController = selectedViewController;
@@ -264,14 +259,14 @@ typedef enum {
 			[selectedViewController viewWillAppear:NO];
 		}
 
-        [self.tabBarView setContentView:selectedViewController.view];
+        [tabBarView setContentView:selectedViewController.view];
         
         if (!self.childViewControllers && visible) {
 			[previousSelectedViewController viewDidDisappear:NO];
 			[selectedViewController viewDidAppear:NO];
 		}
         
-        [self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:[self.viewControllers indexOfObject:selectedViewController]]];
+        [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:[self.viewControllers indexOfObject:selectedViewController]]];
     }
 }
 
@@ -311,7 +306,7 @@ typedef enum {
 {
 
     // Redraw with will rotating and keeping the aspect ratio
-    for (AKTab *tab in [self.tabBar tabs]) {
+    for (AKTab *tab in [tabBar tabs]) {
         [tab setNeedsDisplay];
     }
 

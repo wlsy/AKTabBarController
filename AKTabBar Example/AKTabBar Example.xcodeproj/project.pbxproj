@@ -27,6 +27,7 @@
 		7B263832155338D500013EE7 /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B263831155338D500013EE7 /* FourthViewController.m */; };
 		7B26383B15533B2D00013EE7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26383A15533B2D00013EE7 /* FirstViewController.m */; };
 		7B26383E1553412000013EE7 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B26383D1553412000013EE7 /* ContentViewController.m */; };
+		7BB531CB162F597C00716925 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB531CA162F597C00716925 /* Default-568h@2x.png */; };
 		7BE96D961560DE5200365A47 /* AKTabBarController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BE96D951560DE5200365A47 /* AKTabBarController.bundle */; };
 		7BEB24A7155E8AF50020B3D9 /* AKTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB249A155E8AF50020B3D9 /* AKTab.m */; };
 		7BEB24A9155E8AF50020B3D9 /* AKTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB249C155E8AF50020B3D9 /* AKTabBar.m */; };
@@ -66,6 +67,7 @@
 		7B26383A15533B2D00013EE7 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		7B26383C1553412000013EE7 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		7B26383D1553412000013EE7 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		7BB531CA162F597C00716925 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7BE96D951560DE5200365A47 /* AKTabBarController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AKTabBarController.bundle; path = ../../AKTabBarController/AKTabBarController.bundle; sourceTree = "<group>"; };
 		7BEB2499155E8AF50020B3D9 /* AKTab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKTab.h; path = ../../AKTabBarController/AKTab.h; sourceTree = "<group>"; };
 		7BEB249A155E8AF50020B3D9 /* AKTab.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AKTab.m; path = ../../AKTabBarController/AKTab.m; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		7B2637CA155333E100013EE7 = {
 			isa = PBXGroup;
 			children = (
+				7BB531CA162F597C00716925 /* Default-568h@2x.png */,
 				7B2637DF155333E100013EE7 /* AKTabBar Example */,
 				7B2637D8155333E100013EE7 /* Frameworks */,
 				7B2637D6155333E100013EE7 /* Products */,
@@ -269,6 +272,7 @@
 				7B26380E1553352E00013EE7 /* image-3@2x.png in Resources */,
 				7B26380F1553352E00013EE7 /* image-4.png in Resources */,
 				7B2638101553352E00013EE7 /* image-4@2x.png in Resources */,
+				7BB531CB162F597C00716925 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

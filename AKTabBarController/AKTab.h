@@ -30,6 +30,9 @@
 // Tabs title.
 @property (nonatomic, strong) NSString *tabTitle;
 
+// Height of the tab bar.
+@property (nonatomic, assign) CGFloat tabBarHeight;
+
 // Minimum height that permits the display of the tab's title.
 @property (nonatomic, assign) CGFloat minimumHeightToDisplayTitle;
 

@@ -26,10 +26,6 @@ static int kInterTabMargin = 1;
 
 @implementation AKTabBar
 
-@synthesize tabs = _tabs;
-@synthesize selectedTab = _selectedTab;
-@synthesize delegate;
-
 #pragma mark - Initialization
 
 - (id)initWithFrame:(CGRect)frame
@@ -78,7 +74,7 @@ static int kInterTabMargin = 1;
 
 - (void)tabSelected:(AKTab *)sender
 {
-    [self.delegate tabBar:self didSelectTabAtIndex:[self.tabs indexOfObject:sender]];
+    [_delegate tabBar:self didSelectTabAtIndex:[_tabs indexOfObject:sender]];
 }
 
 
@@ -130,7 +126,7 @@ static int kInterTabMargin = 1;
         
     // Drawing the edge border lines
     CGContextSetRGBFillColor(ctx, 0.1, 0.1, 0.1, 0.8);
-    for (AKTab *tab in self.tabs)
+    for (AKTab *tab in _tabs)
         CGContextFillRect(ctx, CGRectMake(tab.frame.origin.x - kInterTabMargin, 0, kInterTabMargin, rect.size.height));
     
 }
@@ -140,7 +136,7 @@ static int kInterTabMargin = 1;
 
     CGFloat screenWidth = self.bounds.size.width;
     
-    CGFloat tabNumber = self.tabs.count;
+    CGFloat tabNumber = _tabs.count;
     
     // Calculating the tabs width.
     CGFloat tabWidth = floorf(((screenWidth + 1) / tabNumber) - 1);
@@ -155,7 +151,7 @@ static int kInterTabMargin = 1;
 
     CGFloat dTabWith;
     
-    for (AKTab *tab in self.tabs) {
+    for (AKTab *tab in _tabs) {
     
         // Here is the code that increment the width until we use all the space left
         
@@ -166,7 +162,7 @@ static int kInterTabMargin = 1;
             spaceLeft--;
         }
         
-        if ([self.tabs indexOfObject:tab] == 0) {
+        if ([_tabs indexOfObject:tab] == 0) {
             tab.frame = CGRectMake(rect.origin.x, rect.origin.y, dTabWith, rect.size.height);
         } else {
             tab.frame = CGRectMake(rect.origin.x + kInterTabMargin, rect.origin.y, dTabWith, rect.size.height);
@@ -177,7 +173,5 @@ static int kInterTabMargin = 1;
     }
     
 }
-
-#pragma mark - Hide & Show
 
 @end
