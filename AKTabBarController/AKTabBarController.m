@@ -198,7 +198,7 @@ typedef enum {
     }
     
     tabBar.hidden = NO;
-    tabBar.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.view.frame) * directionVector, 0);
+    tabBar.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.view.bounds) * directionVector, 0);
     
     [UIView animateWithDuration:((animated) ? kPushAnimationDuration : 0) animations:^{
         tabBar.transform = CGAffineTransformIdentity;
@@ -230,7 +230,7 @@ typedef enum {
     tabBarView.contentView.frame = tmpTabBarView;
     
     [UIView animateWithDuration:((animated) ? kPushAnimationDuration : 0) animations:^{
-        tabBar.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.view.frame) * directionVector, 0);
+        tabBar.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(self.view.bounds) * directionVector, 0);
     } completion:^(BOOL finished) {
         tabBar.hidden = YES;
         tabBar.transform = CGAffineTransformIdentity;
