@@ -36,6 +36,30 @@
                                                [[ThirdViewController alloc] init],
                                                [[FourthViewController alloc] init],nil]];
     
+    //Tab background Image
+    [self.tabBarController setBackgroundImageName:@"newNoise"];
+    
+    // Tabs top embos Color
+    [self.tabBarController setTabEdgeColor:[UIColor colorWithRed:.1 green:.1 blue:.5 alpha:.8]];
+    
+    // Tabs Colors settings
+    [self.tabBarController setSelectedTabColors:@[[UIColor colorWithRed:1 green:0 blue:0 alpha:1],
+                                                  [UIColor colorWithRed:1 green:0 blue:0 alpha:0]]]; // MAX 2 Colors
+    [self.tabBarController setTabColors:@[[UIColor colorWithRed:0 green:0 blue:1 alpha:.5],
+                                                  [UIColor colorWithRed:0 green:0 blue:1 alpha:0]]]; // MAX 2 Colors
+    
+    // Tab Stroke Color
+    [self.tabBarController setTabStrokeColor:[UIColor colorWithRed:0 green:1 blue:0 alpha:.5]];
+    
+    // Icons Color settings
+    [self.tabBarController setIconColors:@[[UIColor colorWithRed:1 green:0 blue:0 alpha:1],
+                                           [UIColor colorWithRed:1 green:0 blue:0 alpha:1]]]; // MAX 2 Colors
+    [self.tabBarController setSelectedIconColors:@[[UIColor colorWithRed:1 green:0 blue:0 alpha:1],
+                                                   [UIColor colorWithRed:0 green:1 blue:0 alpha:1]]]; // MAX 2 Colors
+    
+    // Hide / Show glossy on tab icons
+    [self.tabBarController setIconGlossyIsHidden:YES];
+    
     [self.window setRootViewController:self.tabBarController];
     [self.window makeKeyAndVisible];
     return YES;

@@ -108,9 +108,20 @@ typedef enum {
 {
     NSMutableArray *tabs = [[NSMutableArray alloc] init];
     for (UIViewController *vc in self.viewControllers) {
-                        
+        
+        [[tabBarView tabBar] setBackgroundImageName:[self backgroundImageName]];
+        [[tabBarView tabBar] setTabColors:[self tabCGColors]];
+        [[tabBarView tabBar] setEdgeColor:[self tabEdgeColor]];
+        
         AKTab *tab = [[AKTab alloc] init];
         [tab setTabImageWithName:[vc tabImageName]];
+        [tab setBackgroundImageName:[self backgroundImageName]];
+        [tab setTabIconColors:[self iconCGColors]];
+        [tab setTabIconColorsSelected:[self selectedIconCGColors]];
+        [tab setTabSelectedColors:[self selectedTabCGColors]];
+        [tab setEdgeColor:[self tabEdgeColor]];
+        [tab setGlossyIsHidden:[self iconGlossyIsHidden]];
+        [tab setStrokeColor:[self tabStrokeColor]];
         [tab setTabTitle:[vc tabTitle]];
         
         [tab setTabBarHeight:tabBarHeight];
@@ -133,6 +144,26 @@ typedef enum {
     
     // Setting the first view controller as the active one
     [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:0]];
+}
+
+- (NSArray *) selectedIconCGColors
+{
+    return _selectedIconColors ? @[(id)[[_selectedIconColors objectAtIndex:0] CGColor], (id)[[_selectedIconColors objectAtIndex:1] CGColor]] : nil;
+}
+
+- (NSArray *) iconCGColors
+{
+    return _iconColors ? @[(id)[[_iconColors objectAtIndex:0] CGColor], (id)[[_iconColors objectAtIndex:1] CGColor]] : nil;
+}
+
+- (NSArray *) tabCGColors
+{
+    return _tabColors ? @[(id)[[_tabColors objectAtIndex:0] CGColor], (id)[[_tabColors objectAtIndex:1] CGColor]] : nil;
+}
+
+- (NSArray *) selectedTabCGColors
+{
+    return _selectedTabColors ? @[(id)[[_selectedTabColors objectAtIndex:0] CGColor], (id)[[_selectedTabColors objectAtIndex:1] CGColor]] : nil;
 }
 
 #pragma - UINavigationControllerDelegate

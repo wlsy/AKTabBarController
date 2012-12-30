@@ -189,7 +189,7 @@ static const float kTopMargin = 2.0;
                 0.612, 0.612, 0.612, 1.0};  // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
+            CGGradientRef gradient = _tabIconColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
             
@@ -210,7 +210,7 @@ static const float kTopMargin = 2.0;
         // We fill the background with a noise pattern
         CGContextSaveGState(ctx);
         {
-            [[UIColor colorWithPatternImage:[UIImage imageNamed:@"AKTabBarController.bundle/noise-pattern"]] set];
+            [[UIColor colorWithPatternImage:[UIImage imageNamed:_backgroundImageName ? _backgroundImageName : @"AKTabBarController.bundle/noise-pattern"]] set];
             CGContextFillRect(ctx, rect);
             
             // We set the parameters of th gradient multiply blend
@@ -220,13 +220,13 @@ static const float kTopMargin = 2.0;
                 0.2, 0.2, 0.2, 0.4}; // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
+            CGGradientRef gradient = _tabSelectedColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabSelectedColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             CGContextSetBlendMode(ctx, kCGBlendModeMultiply);
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, kTopMargin), CGPointMake(0, rect.size.height - kTopMargin), kCGGradientDrawsAfterEndLocation);
             
             // top dark emboss
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-            CGContextSetRGBFillColor(ctx, 0.1, 0.1, 0.1, 0.8);
+            CGContextSetFillColorWithColor(ctx, _edgeColor ? [_edgeColor CGColor] : [[UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f] CGColor]);
             CGContextFillRect(ctx, CGRectMake(0, 0, rect.size.width, 1));
         }
         CGContextRestoreGState(ctx);
@@ -235,7 +235,7 @@ static const float kTopMargin = 2.0;
         CGContextSaveGState(ctx);
         {
             CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
-            CGContextSetRGBFillColor(ctx, 0.7, 0.7, 0.7, 0.4);
+            CGContextSetFillColorWithColor(ctx, _strokeColor ? [_strokeColor CGColor] : [[UIColor colorWithRed:.7f green:.7f blue:.7f alpha:.4f] CGColor]);
             CGContextFillRect(ctx, CGRectMake(0, 2, 1, rect.size.height - 2));
             CGContextFillRect(ctx, CGRectMake(rect.size.width - 1, 2, 1, rect.size.height - 2));
         }
@@ -266,7 +266,7 @@ static const float kTopMargin = 2.0;
                 0.537, 0.773, 0.988, 1.0};  // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
+            CGGradientRef gradient = _tabIconColorsSelected ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColorsSelected, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
             
@@ -303,8 +303,8 @@ static const float kTopMargin = 2.0;
             // Drawing the clipped gradient
             size_t num_locations = 2;
             CGFloat locations[2] = {1, 0};
-            CGFloat components[8] = {1.0, 1.0, 1.0, 0.5, // Start color
-                1.0, 1.0, 1.0, 0.15};  // End color
+            CGFloat components[8] = {1.0, 1.0, 1.0, _glossyIsHidden ? 0 : 0.5, // Start color
+                1.0, 1.0, 1.0, _glossyIsHidden ? 0 : 0.15};  // End color
             
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
             CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);

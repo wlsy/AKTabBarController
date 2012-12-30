@@ -27,8 +27,29 @@
 // Image used to draw the icon.
 @property (nonatomic, strong) NSString *tabImageWithName;
 
+// Tab background image
+@property (nonatomic, strong) NSString *backgroundImageName;
+
 // Tabs title.
 @property (nonatomic, strong) NSString *tabTitle;
+
+// Tabs icon colors.
+@property (nonatomic, strong) NSArray *tabIconColors;
+
+// Tabs selected icon colors.
+@property (nonatomic, strong) NSArray *tabIconColorsSelected;
+
+// Tabs selected colors.
+@property (nonatomic, strong) NSArray *tabSelectedColors;
+
+// Tabs icon glossy show / hide
+@property (nonatomic, assign) BOOL glossyIsHidden;
+
+// Tab stroke Color
+@property (nonatomic, strong) UIColor *strokeColor;
+
+// Tab top embos Color
+@property (nonatomic, strong) UIColor *edgeColor;
 
 // Height of the tab bar.
 @property (nonatomic, assign) CGFloat tabBarHeight;

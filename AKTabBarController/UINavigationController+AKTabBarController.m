@@ -21,6 +21,7 @@
 // THE SOFTWARE.
 
 #import "UINavigationController+AKTabBarController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation UINavigationController (AKTabBarController)
 

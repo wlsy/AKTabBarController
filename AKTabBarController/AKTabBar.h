@@ -30,6 +30,15 @@
 @property (nonatomic, strong) AKTab *selectedTab;
 @property (nonatomic, assign) id <AKTabBarDelegate> delegate;
 
+// Tab top embos Color
+@property (nonatomic, strong) UIColor *edgeColor;
+
+// Tabs selected colors.
+@property (nonatomic, strong) NSArray *tabColors;
+
+// Tab background image
+@property (nonatomic, strong) NSString *backgroundImageName;
+
 - (void)tabSelected:(AKTab *)sender;
 
 @end
