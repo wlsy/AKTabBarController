@@ -316,7 +316,7 @@ typedef enum {
         }
     
     } else {
-        
+        [[self navigationItem] setTitle:[vc title]];
         self.selectedViewController = vc;
     }
 }
