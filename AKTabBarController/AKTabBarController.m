@@ -101,6 +101,7 @@ typedef enum {
     
     tabBarView.tabBar = tabBar;
     tabBarView.contentView = _selectedViewController.view;
+    [[self navigationItem] setTitle:[_selectedViewController title]];
     [self loadTabs];
 }
 
