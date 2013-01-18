@@ -22,7 +22,16 @@
 
 #import "AKTab.h"
 
-@protocol AKTabBarDelegate;
+@class AKTabBar;
+
+@protocol AKTabBarDelegate <NSObject>
+
+@required
+
+// Used by the TabBarController to be notified when a tab is pressed
+- (void)tabBar:(AKTabBar *)AKTabBarDelegate didSelectTabAtIndex:(NSInteger)index;
+
+@end
 
 @interface AKTabBar : UIView
 
@@ -40,14 +49,5 @@
 @property (nonatomic, strong) NSString *backgroundImageName;
 
 - (void)tabSelected:(AKTab *)sender;
-
-@end
-
-@protocol AKTabBarDelegate <NSObject>
-
-@required
-
-// Used by the TabBarController to no
-- (void)tabBar:(AKTabBar *)AKTabBarDelegate didSelectTabAtIndex:(NSInteger)index;
 
 @end

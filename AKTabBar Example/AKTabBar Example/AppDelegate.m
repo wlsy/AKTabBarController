@@ -15,53 +15,64 @@
 #import "FourthViewController.h"
 
 @implementation AppDelegate
-@synthesize window;
-@synthesize tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // If the device is an iPad, we make it taller.
-    self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 70 : 50];
+    _tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 70 : 50];
+    [_tabBarController setMinimumHeightToDisplayTitle:40.0];
     
     UITableViewController *tableViewController = [[FirstViewController alloc] initWithStyle:UITableViewStylePlain];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
     navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
     
-    [self.tabBarController setViewControllers:[NSMutableArray arrayWithObjects:
+    [_tabBarController setViewControllers:[NSMutableArray arrayWithObjects:
                                                navigationController,
                                                [[SecondViewController alloc] init],
                                                [[ThirdViewController alloc] init],
                                                [[FourthViewController alloc] init],nil]];
     
-//    //Tab background Image
-//    [self.tabBarController setBackgroundImageName:@"newNoise"];
-//    
-//    // Tabs top embos Color
-//    [self.tabBarController setTabEdgeColor:[UIColor colorWithRed:.1 green:.1 blue:.5 alpha:.8]];
-//    
-//    // Tabs Colors settings
-//    [self.tabBarController setSelectedTabColors:@[[UIColor colorWithRed:1 green:0 blue:0 alpha:1],
-//                                                  [UIColor colorWithRed:1 green:0 blue:0 alpha:0]]]; // MAX 2 Colors
-//    [self.tabBarController setTabColors:@[[UIColor colorWithRed:0 green:0 blue:1 alpha:.5],
-//                                                  [UIColor colorWithRed:0 green:0 blue:1 alpha:0]]]; // MAX 2 Colors
-//    
-//    // Tab Stroke Color
-//    [self.tabBarController setTabStrokeColor:[UIColor colorWithRed:0 green:1 blue:0 alpha:.5]];
-//    
-//    // Icons Color settings
-//    [self.tabBarController setIconColors:@[[UIColor colorWithRed:1 green:0 blue:0 alpha:1],
-//                                           [UIColor colorWithRed:1 green:0 blue:0 alpha:1]]]; // MAX 2 Colors
-//    [self.tabBarController setSelectedIconColors:@[[UIColor colorWithRed:1 green:0 blue:0 alpha:1],
-//                                                   [UIColor colorWithRed:0 green:1 blue:0 alpha:1]]]; // MAX 2 Colors
-//    
-//    // Hide / Show glossy on tab icons
-//    [self.tabBarController setIconGlossyIsHidden:YES];
     
-    [self.window setRootViewController:self.tabBarController];
-    [self.window makeKeyAndVisible];
+    // Below you will find an example of possible customization, just uncomment the lines
+    
+    /*
+    // Tab background Image
+    [_tabBarController setBackgroundImageName:@"noise-dark-gray.png"];
+    [_tabBarController setSelectedBackgroundImageName:@"noise-dark-blue.png"];
+
+    // Tabs top embos Color
+    [_tabBarController setTabEdgeColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8]];
+
+    // Tabs Colors settings
+    [_tabBarController setTabColors:@[[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.0],
+                                          [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]]]; // MAX 2 Colors
+    
+    [_tabBarController setSelectedTabColors:@[[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0],
+                                                  [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]]; // MAX 2 Colors
+
+    // Tab Stroke Color
+    [_tabBarController setTabStrokeColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+
+    // Icons Color settings
+    [_tabBarController setIconColors:@[[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1],
+                                           [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]]]; // MAX 2 Colors
+    
+    [_tabBarController setSelectedIconColors:@[[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1],
+                                                   [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]]]; // MAX 2 Colors
+    
+    // Text Color
+    [_tabBarController setTextColor:[UIColor colorWithRed:157.0/255.0 green:157.0/255.0 blue:157.0/255.0 alpha:1.0]];
+    [_tabBarController setSelectedTextColor:[UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0]];
+    
+    // Hide / Show glossy on tab icons
+    [_tabBarController setIconGlossyIsHidden:YES];
+    */
+    
+    [_window setRootViewController:_tabBarController];
+    [_window makeKeyAndVisible];
     return YES;
 }
 

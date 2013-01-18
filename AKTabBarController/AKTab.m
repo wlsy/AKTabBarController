@@ -111,7 +111,7 @@ static const float kTopMargin = 2.0;
     UILabel *tabTitleLabel = [[UILabel alloc] init];
     tabTitleLabel.text = _tabTitle;
     tabTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11.0];
-    CGSize labelSize = [tabTitleLabel.text sizeWithFont:tabTitleLabel.font forWidth:CGRectGetWidth(rect) lineBreakMode:UILineBreakModeMiddleTruncation];
+    CGSize labelSize = [tabTitleLabel.text sizeWithFont:tabTitleLabel.font forWidth:CGRectGetWidth(rect) lineBreakMode:NSLineBreakByTruncatingMiddle ];
     
     CGRect labelRect = CGRectZero;
     
@@ -192,15 +192,15 @@ static const float kTopMargin = 2.0;
             CGGradientRef gradient = _tabIconColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
-            
         }
         CGContextRestoreGState(ctx);
         
         if (displayTabTitle) {
             CGContextSaveGState(ctx);
             {
-                CGContextSetRGBFillColor(ctx, 0.461, 0.461, 0.461, 1);
-                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font lineBreakMode:UILineBreakModeMiddleTruncation alignment:UITextAlignmentCenter];
+                UIColor *textColor = [UIColor colorWithRed:0.461 green:0.461 blue:0.461 alpha:1.0];
+                CGContextSetFillColorWithColor(ctx, _textColor ? _textColor.CGColor : textColor.CGColor);
+                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font lineBreakMode:NSLineBreakByTruncatingMiddle  alignment:UITextAlignmentCenter];
             }
             CGContextRestoreGState(ctx);
         }
@@ -210,7 +210,7 @@ static const float kTopMargin = 2.0;
         // We fill the background with a noise pattern
         CGContextSaveGState(ctx);
         {
-            [[UIColor colorWithPatternImage:[UIImage imageNamed:_backgroundImageName ? _backgroundImageName : @"AKTabBarController.bundle/noise-pattern"]] set];
+            [[UIColor colorWithPatternImage:[UIImage imageNamed:_selectedBackgroundImageName ? _selectedBackgroundImageName : @"AKTabBarController.bundle/noise-pattern"]] set];
             CGContextFillRect(ctx, rect);
             
             // We set the parameters of th gradient multiply blend
@@ -316,8 +316,9 @@ static const float kTopMargin = 2.0;
         if (displayTabTitle) {
             CGContextSaveGState(ctx);
             {
-                CGContextSetRGBFillColor(ctx, 0.961, 0.961, 0.961, 1);
-                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font lineBreakMode:UILineBreakModeMiddleTruncation alignment:UITextAlignmentCenter];
+                UIColor *textColor = [UIColor colorWithRed:0.961 green:0.961 blue:0.961 alpha:1.0];
+                CGContextSetFillColorWithColor(ctx, _selectedTextColor ? _selectedTextColor.CGColor : textColor.CGColor);
+                [tabTitleLabel.text drawInRect:labelRect withFont:tabTitleLabel.font lineBreakMode:NSLineBreakByTruncatingMiddle  alignment:UITextAlignmentCenter];
             }
             CGContextRestoreGState(ctx);
         }

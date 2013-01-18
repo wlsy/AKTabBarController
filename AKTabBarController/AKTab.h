@@ -30,6 +30,15 @@
 // Tab background image
 @property (nonatomic, strong) NSString *backgroundImageName;
 
+// Tab selected background image
+@property (nonatomic, strong) NSString *selectedBackgroundImageName;
+
+// Tab text color
+@property (nonatomic, strong) UIColor *textColor;
+
+// Tab selected text color
+@property (nonatomic, strong) UIColor *selectedTextColor;
+
 // Tabs title.
 @property (nonatomic, strong) NSString *tabTitle;
 

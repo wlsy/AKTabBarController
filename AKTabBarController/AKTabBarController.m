@@ -117,12 +117,15 @@ typedef enum {
         AKTab *tab = [[AKTab alloc] init];
         [tab setTabImageWithName:[vc tabImageName]];
         [tab setBackgroundImageName:[self backgroundImageName]];
+        [tab setSelectedBackgroundImageName:[self selectedBackgroundImageName]];
         [tab setTabIconColors:[self iconCGColors]];
         [tab setTabIconColorsSelected:[self selectedIconCGColors]];
         [tab setTabSelectedColors:[self selectedTabCGColors]];
         [tab setEdgeColor:[self tabEdgeColor]];
         [tab setGlossyIsHidden:[self iconGlossyIsHidden]];
         [tab setStrokeColor:[self tabStrokeColor]];
+        [tab setTextColor:[self textColor]];
+        [tab setSelectedTextColor:[self selectedTextColor]];
         [tab setTabTitle:[vc tabTitle]];
         
         [tab setTabBarHeight:tabBarHeight];

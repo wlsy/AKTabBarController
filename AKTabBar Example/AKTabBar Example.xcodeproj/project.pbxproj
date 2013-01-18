@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		109E213E1690A03C008DF401 /* newNoise.png in Resources */ = {isa = PBXBuildFile; fileRef = 109E213C1690A03C008DF401 /* newNoise.png */; };
-		109E213F1690A03C008DF401 /* newNoise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 109E213D1690A03C008DF401 /* newNoise@2x.png */; };
 		7B2637DA155333E100013EE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B2637D9155333E100013EE7 /* UIKit.framework */; };
 		7B2637DC155333E100013EE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B2637DB155333E100013EE7 /* Foundation.framework */; };
 		7B2637DE155333E100013EE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B2637DD155333E100013EE7 /* CoreGraphics.framework */; };
@@ -37,11 +35,13 @@
 		7BEB24AE155E8AF50020B3D9 /* AKTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB24A1155E8AF50020B3D9 /* AKTabBarView.m */; };
 		7BEB24B0155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB24A3155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m */; };
 		7BEB24B2155E8AF50020B3D9 /* UIViewController+AKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BEB24A5155E8AF50020B3D9 /* UIViewController+AKTabBarController.m */; };
+		7BF3638D16A8C37B0023C403 /* noise-dark-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF3638916A8C37B0023C403 /* noise-dark-blue.png */; };
+		7BF3638E16A8C37B0023C403 /* noise-dark-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF3638A16A8C37B0023C403 /* noise-dark-blue@2x.png */; };
+		7BF3638F16A8C37B0023C403 /* noise-dark-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF3638B16A8C37B0023C403 /* noise-dark-gray.png */; };
+		7BF3639016A8C37B0023C403 /* noise-dark-gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF3638C16A8C37B0023C403 /* noise-dark-gray@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		109E213C1690A03C008DF401 /* newNoise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newNoise.png; sourceTree = "<group>"; };
-		109E213D1690A03C008DF401 /* newNoise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newNoise@2x.png"; sourceTree = "<group>"; };
 		7B2637D5155333E100013EE7 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2637D9155333E100013EE7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B2637DB155333E100013EE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,7 +71,7 @@
 		7B26383A15533B2D00013EE7 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		7B26383C1553412000013EE7 /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		7B26383D1553412000013EE7 /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		7BB531CA162F597C00716925 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7BB531CA162F597C00716925 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		7BE96D951560DE5200365A47 /* AKTabBarController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AKTabBarController.bundle; path = ../../AKTabBarController/AKTabBarController.bundle; sourceTree = "<group>"; };
 		7BEB2499155E8AF50020B3D9 /* AKTab.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AKTab.h; path = ../../AKTabBarController/AKTab.h; sourceTree = "<group>"; };
 		7BEB249A155E8AF50020B3D9 /* AKTab.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AKTab.m; path = ../../AKTabBarController/AKTab.m; sourceTree = "<group>"; };
@@ -85,6 +85,10 @@
 		7BEB24A3155E8AF50020B3D9 /* UINavigationController+AKTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+AKTabBarController.m"; path = "../../AKTabBarController/UINavigationController+AKTabBarController.m"; sourceTree = "<group>"; };
 		7BEB24A4155E8AF50020B3D9 /* UIViewController+AKTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIViewController+AKTabBarController.h"; path = "../../AKTabBarController/UIViewController+AKTabBarController.h"; sourceTree = "<group>"; };
 		7BEB24A5155E8AF50020B3D9 /* UIViewController+AKTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+AKTabBarController.m"; path = "../../AKTabBarController/UIViewController+AKTabBarController.m"; sourceTree = "<group>"; };
+		7BF3638916A8C37B0023C403 /* noise-dark-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noise-dark-blue.png"; sourceTree = "<group>"; };
+		7BF3638A16A8C37B0023C403 /* noise-dark-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noise-dark-blue@2x.png"; sourceTree = "<group>"; };
+		7BF3638B16A8C37B0023C403 /* noise-dark-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noise-dark-gray.png"; sourceTree = "<group>"; };
+		7BF3638C16A8C37B0023C403 /* noise-dark-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "noise-dark-gray@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +109,6 @@
 		7B2637CA155333E100013EE7 = {
 			isa = PBXGroup;
 			children = (
-				7BB531CA162F597C00716925 /* Default-568h@2x.png */,
 				7B2637DF155333E100013EE7 /* AKTabBar Example */,
 				7B2637D8155333E100013EE7 /* Frameworks */,
 				7B2637D6155333E100013EE7 /* Products */,
@@ -183,8 +186,11 @@
 		7B2637FC1553346C00013EE7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				109E213C1690A03C008DF401 /* newNoise.png */,
-				109E213D1690A03C008DF401 /* newNoise@2x.png */,
+				7BB531CA162F597C00716925 /* Default-568h@2x.png */,
+				7BF3638916A8C37B0023C403 /* noise-dark-blue.png */,
+				7BF3638A16A8C37B0023C403 /* noise-dark-blue@2x.png */,
+				7BF3638B16A8C37B0023C403 /* noise-dark-gray.png */,
+				7BF3638C16A8C37B0023C403 /* noise-dark-gray@2x.png */,
 				7B2638011553352E00013EE7 /* image-1.png */,
 				7B2638021553352E00013EE7 /* image-1@2x.png */,
 				7B2638031553352E00013EE7 /* image-2.png */,
@@ -279,8 +285,10 @@
 				7B26380F1553352E00013EE7 /* image-4.png in Resources */,
 				7B2638101553352E00013EE7 /* image-4@2x.png in Resources */,
 				7BB531CB162F597C00716925 /* Default-568h@2x.png in Resources */,
-				109E213E1690A03C008DF401 /* newNoise.png in Resources */,
-				109E213F1690A03C008DF401 /* newNoise@2x.png in Resources */,
+				7BF3638D16A8C37B0023C403 /* noise-dark-blue.png in Resources */,
+				7BF3638E16A8C37B0023C403 /* noise-dark-blue@2x.png in Resources */,
+				7BF3638F16A8C37B0023C403 /* noise-dark-gray.png in Resources */,
+				7BF3639016A8C37B0023C403 /* noise-dark-gray@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
