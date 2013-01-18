@@ -10,7 +10,7 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 - Ability to hide the title in the tabs.
 - When the height of the tab bar is too small, the title is not displayed.
 - Only one image is needed for both selected and unselected states (style is added via CoreGraphics).
-- Images are resized when needed and particularly in landscape mode.
+- Icons are resized when needed and particularly in landscape mode.
 - Animated state of the tabs with a nice cross fade animation.
 
 ## Preview
