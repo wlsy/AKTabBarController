@@ -2,7 +2,6 @@
 
 AKTabBarController is an adaptive and customizable tab bar for iOS.
 
-
 ##Features
 - Portrait and Landscape mode tab bar.
 - Ability to set the height of the tab bar.
@@ -14,6 +13,9 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 - Images are resized when needed and particularly in landscape mode.
 - Animated state of the tabs with a nice cross fade animation.
 
+## Preview
+###iPhone portrait
+![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/iphone-portrait.png)
 
 ##Usage
 ### Creation and initialization of the tab bar
@@ -22,12 +24,9 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 
 // Adding the view controllers to manage.
-[self.tabBarController setViewControllers:[NSMutableArray arrayWithObjects:
-                                              [[FirstViewController alloc] init],
-                                              [[SecondViewController alloc] init],
-                                              [[ThirdViewController alloc] init],
-                                              [[FourthViewController alloc] init],nil]];  
+[self.tabBarController setViewControllers:[NSMutableArray arrayWithObjects: [[FirstViewController alloc] init], [[SecondViewController alloc] init], [[ThirdViewController alloc] init], [[FourthViewController alloc] init],nil]];  
 ```
+
 ### Setting the title and image
 (in each view controller)
 
@@ -44,7 +43,7 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 	return @"Tab";
 }
 ```
-
+## Customization
 ### Setting the minimum height to display the title
 
 ``` objective-c  
@@ -62,7 +61,39 @@ When pushing a viewcontroller in the viewControllers stack of an UINavigationCon
 ``` objective-c
 [viewController setHidesBottomBarWhenPushed:YES];
 ```
-  
+### Full customization example
+
+``` objective-c
+// Tab background Image
+[_tabBarController setBackgroundImageName:@"noise-dark-gray.png"];
+[_tabBarController setSelectedBackgroundImageName:@"noise-dark-blue.png"];
+
+// Tabs top emboss Color
+[_tabBarController setTabEdgeColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8]];
+
+// Tabs Colors settings
+[_tabBarController setTabColors:@[[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.0], [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]]]; // MAX 2 Colors
+
+[_tabBarController setSelectedTabColors:@[[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0], [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]]; // MAX 2 Colors
+
+// Tab Stroke Color
+[_tabBarController setTabStrokeColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+
+// Icons Color settings
+[_tabBarController setIconColors:@[[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]]]; // MAX 2 Colors
+
+[_tabBarController setSelectedIconColors:@[[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]]]; // MAX 2 Colors
+
+// Text Color
+[_tabBarController setTextColor:[UIColor colorWithRed:157.0/255.0 green:157.0/255.0 blue:157.0/255.0 alpha:1.0]];
+[_tabBarController setSelectedTextColor:[UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0]];
+
+// Hide / Show glossy on tab icons
+[_tabBarController setIconGlossyIsHidden:YES];
+```
+###See below the result of the customization:  
+![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/iphone-portrait-customized.png)
+
 For further details see the Xcode example project.
 
 ##Requirements
@@ -72,21 +103,14 @@ For further details see the Xcode example project.
 
 ##Screenshots
 
-###iPhone portrait
-![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/iphone-portrait.png)
-
 ###iPhone landscape
-![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/iphone-landscape.png)
+![iPhone landscape](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/iphone-landscape.png)
 
 ###iPad portrait
 ![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/ipad-portrait.png)
 
 ###iPad landscape
-![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/ipad-landscape.png)
-
-##Todo
-- Ability to set any background pattern.
-- Support different styles (dark, light, etc).
+![iPad portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/ipad-landscape.png)
 
 ##Credits
 - Largely inspired by **Brian Collins**'s [BCTabBarController](https://github.com/briancollins/BCTabBarController) (for views imbrication).
