@@ -18,13 +18,31 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 ![iPhone portrait](https://github.com/alikaragoz/AKTabBarController/raw/master/Screenshots/iphone-portrait.png)
 
 ##Usage
+
+###Installation
+Add the dependency to your `Podfile`:
+
+```ruby
+platform :ios
+
+pod 'AKTabBarController'
+```
+
+Run `pod install` to install the dependencies.
+
+Next, import the header file wherever you want to use the tab bar controller:
+
+```objc
+#import "AKTabBarController.h"
+```
+
 ### Creation and initialization of the tab bar
 ``` objective-c  
 // Create and initialize the height of the tab bar to 50px.
-self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
+_tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 
 // Adding the view controllers to manage.
-[self.tabBarController setViewControllers:[NSMutableArray arrayWithObjects: [[FirstViewController alloc] init], [[SecondViewController alloc] init], [[ThirdViewController alloc] init], [[FourthViewController alloc] init],nil]];  
+[_tabBarController setViewControllers:@[[[FirstViewController alloc] init], [[SecondViewController alloc] init], [[ThirdViewController alloc] init], [[FourthViewController alloc] init]]]];  
 ```
 
 ### Setting the title and image
@@ -47,13 +65,13 @@ self.tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 ### Setting the minimum height to display the title
 
 ``` objective-c  
-[self.tabBarController setMinimumHeightToDisplayTitle:50];
+[_tabBarController setMinimumHeightToDisplayTitle:50];
 ```
 
 ### Hide the tab title
 
 ``` objective-c  
-[self.tabBarController setTabTitleIsHidden:NO];
+[_tabBarController setTabTitleIsHidden:NO];
 ```
 ### Hide the tab bar when pushed in an UINavigationController
 When pushing a viewcontroller in the viewControllers stack of an UINavigationController it is possible to hide the tab bar. It works exactely like the original UITabBarController:
@@ -71,24 +89,22 @@ When pushing a viewcontroller in the viewControllers stack of an UINavigationCon
 // Tabs top emboss Color
 [_tabBarController setTabEdgeColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.8]];
 
-// Tabs Colors settings
+// Tabs colors settings
 [_tabBarController setTabColors:@[[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.0], [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]]]; // MAX 2 Colors
-
 [_tabBarController setSelectedTabColors:@[[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0], [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.0]]]; // MAX 2 Colors
 
-// Tab Stroke Color
+// Tab stroke Color
 [_tabBarController setTabStrokeColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
 
-// Icons Color settings
+// Icons color settings
 [_tabBarController setIconColors:@[[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]]]; // MAX 2 Colors
-
 [_tabBarController setSelectedIconColors:@[[UIColor colorWithRed:174.0/255.0 green:174.0/255.0 blue:174.0/255.0 alpha:1], [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1]]]; // MAX 2 Colors
 
-// Text Color
+// Text color
 [_tabBarController setTextColor:[UIColor colorWithRed:157.0/255.0 green:157.0/255.0 blue:157.0/255.0 alpha:1.0]];
 [_tabBarController setSelectedTextColor:[UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0]];
 
-// Hide / Show glossy on tab icons
+// Hide / Show glossy effect on tab icons
 [_tabBarController setIconGlossyIsHidden:YES];
 ```
 ###See below the result of the customization:  
