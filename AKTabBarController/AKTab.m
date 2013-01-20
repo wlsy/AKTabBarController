@@ -192,6 +192,9 @@ static const float kTopMargin = 2.0;
             CGGradientRef gradient = _tabIconColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
+            
+            CGColorSpaceRelease(colorSpace);
+            CGGradientRelease(gradient);
         }
         CGContextRestoreGState(ctx);
         
@@ -228,6 +231,9 @@ static const float kTopMargin = 2.0;
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
             CGContextSetFillColorWithColor(ctx, _edgeColor ? [_edgeColor CGColor] : [[UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f] CGColor]);
             CGContextFillRect(ctx, CGRectMake(0, 0, rect.size.width, 1));
+            
+            CGColorSpaceRelease(colorSpace);
+            CGGradientRelease(gradient);
         }
         CGContextRestoreGState(ctx);
         
@@ -270,6 +276,8 @@ static const float kTopMargin = 2.0;
             
             CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
             
+            CGColorSpaceRelease(colorSpace);
+            CGGradientRelease(gradient);
         }
         CGContextRestoreGState(ctx);
         
@@ -310,6 +318,9 @@ static const float kTopMargin = 2.0;
             CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
             CGContextDrawRadialGradient(ctx, gradient, CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect)), 0, CGPointMake(CGRectGetMaxX(imageRect), CGRectGetMaxY(imageRect)), radius, kCGGradientDrawsBeforeStartLocation);
             
+            CGColorSpaceRelease(colorSpace);
+            CGGradientRelease(gradient);
+            CGPathRelease(glossPath);
         }
         CGContextRestoreGState(ctx);
         

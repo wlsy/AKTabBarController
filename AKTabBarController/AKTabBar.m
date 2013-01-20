@@ -103,6 +103,9 @@ static int kInterTabMargin = 1;
         CGGradientRef gradient = _tabColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
         CGContextSetBlendMode(ctx, kCGBlendModeMultiply);
         CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, 0), CGPointMake(0, rect.size.height), kCGGradientDrawsAfterEndLocation);
+        
+        CGColorSpaceRelease(colorSpace);
+        CGGradientRelease(gradient);
     }
     CGContextRestoreGState(ctx);
     
