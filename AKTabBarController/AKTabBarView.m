@@ -28,7 +28,8 @@
 
 - (void)setTabBar:(AKTabBar *)tabBar
 {
-    if (_tabBar != tabBar) {
+    if (_tabBar != tabBar)
+    {
         [_tabBar removeFromSuperview];
         _tabBar = tabBar;
         [self addSubview:tabBar];
@@ -38,11 +39,14 @@
 
 - (void)setContentView:(UIView *)contentView
 {
-    [_contentView removeFromSuperview];
-    _contentView = contentView;
-    _contentView.frame = CGRectZero;
-    [self addSubview:_contentView];
-    [self sendSubviewToBack:_contentView];
+    if (_contentView != contentView)
+    {
+        [_contentView removeFromSuperview];
+        _contentView = contentView;
+        _contentView.frame = CGRectZero;
+        [self addSubview:_contentView];
+        [self sendSubviewToBack:_contentView];
+    }
 }
 
 #pragma mark - Layout & Drawing
@@ -50,17 +54,16 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGRect contentViewRect = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - ((!_isTabBarHidding) ? _tabBar.bounds.size.height : 0));
+    CGRect tabBarRect = _tabBar.frame;
+    tabBarRect.origin.y = CGRectGetHeight(self.bounds) - CGRectGetHeight(_tabBar.bounds);
+    [_tabBar setFrame:tabBarRect];
+    
+    CGRect contentViewRect = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) - ((!_isTabBarHidding) ? CGRectGetHeight(_tabBar.bounds) : 0));
     _contentView.frame = contentViewRect;
     [_contentView setNeedsLayout];
 }
 
-- (void)drawRect:(CGRect)rect
-{
-	CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetRGBFillColor(ctx, 230, 230, 230, 1.0);
-	CGContextFillRect(ctx, self.bounds);
-}
+
 
 
 @end
