@@ -24,7 +24,7 @@
     _tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 70 : 50];
     [_tabBarController setMinimumHeightToDisplayTitle:40.0];
     
-    UITableViewController *tableViewController = [[FirstViewController alloc] initWithStyle:UITableViewStylePlain];
+    FirstViewController *tableViewController = [[FirstViewController alloc] initWithStyle:UITableViewStylePlain];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:tableViewController];
     navigationController.navigationBar.tintColor = [UIColor darkGrayColor];
