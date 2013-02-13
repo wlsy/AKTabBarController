@@ -171,7 +171,7 @@ static const float kTopMargin = 2.0;
         CGContextSaveGState(ctx);
         {
             CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
-            CGContextSetRGBFillColor(ctx, 0.7, 0.7, 0.7, 0.1);
+            CGContextSetFillColorWithColor(ctx, _innerStrokeColor ? [_innerStrokeColor CGColor] : [[UIColor colorWithRed:.7f green:.7f blue:.7f alpha:.1f] CGColor]);
             CGContextFillRect(ctx, CGRectMake(0, kTopMargin, 1, rect.size.height - kTopMargin));
             CGContextFillRect(ctx, CGRectMake(rect.size.width - 1, 2, 1, rect.size.height - 2));
         }

@@ -53,6 +53,9 @@
 // Tab stroke Color
 @property (nonatomic, strong) UIColor *tabStrokeColor;
 
+// Tab inner stroke Color
+@property (nonatomic, strong) UIColor *tabInnerStrokeColor;
+
 // Tab top embos Color
 @property (nonatomic, strong) UIColor *tabEdgeColor;
 

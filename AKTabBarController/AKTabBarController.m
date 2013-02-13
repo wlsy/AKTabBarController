@@ -122,6 +122,7 @@ typedef enum {
         [tab setEdgeColor:[self tabEdgeColor]];
         [tab setGlossyIsHidden:[self iconGlossyIsHidden]];
         [tab setStrokeColor:[self tabStrokeColor]];
+        [tab setInnerStrokeColor:[self tabInnerStrokeColor]];
         [tab setTextColor:[self textColor]];
         [tab setSelectedTextColor:[self selectedTextColor]];
         [tab setTabTitle:[vc tabTitle]];
