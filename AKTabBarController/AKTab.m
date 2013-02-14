@@ -244,7 +244,11 @@ static const float kTopMargin = 2.0;
             
             // top dark emboss
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-            CGContextSetFillColorWithColor(ctx, _edgeColor ? [_edgeColor CGColor] : [[UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f] CGColor]);
+            UIColor *topEdgeColor = _topEdgeColor;
+            if (!topEdgeColor) {
+                _edgeColor ? _edgeColor : [UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f];
+            }
+            CGContextSetFillColorWithColor(ctx, topEdgeColor.CGColor);
             CGContextFillRect(ctx, CGRectMake(0, 0, rect.size.width, 1));
             
             CGColorSpaceRelease(colorSpace);
