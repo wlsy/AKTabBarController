@@ -111,6 +111,7 @@ typedef enum {
         [[tabBarView tabBar] setBackgroundImageName:[self backgroundImageName]];
         [[tabBarView tabBar] setTabColors:[self tabCGColors]];
         [[tabBarView tabBar] setEdgeColor:[self tabEdgeColor]];
+        [[tabBarView tabBar] setTopEdgeColor:[self topEdgeColor]];
         
         AKTab *tab = [[AKTab alloc] init];
         [tab setTabImageWithName:[vc tabImageName]];
@@ -120,8 +121,10 @@ typedef enum {
         [tab setTabIconColorsSelected:[self selectedIconCGColors]];
         [tab setTabSelectedColors:[self selectedTabCGColors]];
         [tab setEdgeColor:[self tabEdgeColor]];
+        [tab setTopEdgeColor:[self topEdgeColor]];
         [tab setGlossyIsHidden:[self iconGlossyIsHidden]];
         [tab setStrokeColor:[self tabStrokeColor]];
+        [tab setInnerStrokeColor:[self tabInnerStrokeColor]];
         [tab setTextColor:[self textColor]];
         [tab setSelectedTextColor:[self selectedTextColor]];
         [tab setTabTitle:[vc tabTitle]];

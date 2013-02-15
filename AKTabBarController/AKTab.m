@@ -171,7 +171,7 @@ static const float kTopMargin = 2.0;
         CGContextSaveGState(ctx);
         {
             CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
-            CGContextSetRGBFillColor(ctx, 0.7, 0.7, 0.7, 0.1);
+            CGContextSetFillColorWithColor(ctx, _innerStrokeColor ? [_innerStrokeColor CGColor] : [[UIColor colorWithRed:.7f green:.7f blue:.7f alpha:.1f] CGColor]);
             CGContextFillRect(ctx, CGRectMake(0, kTopMargin, 1, rect.size.height - kTopMargin));
             CGContextFillRect(ctx, CGRectMake(rect.size.width - 1, 2, 1, rect.size.height - 2));
         }
@@ -244,7 +244,11 @@ static const float kTopMargin = 2.0;
             
             // top dark emboss
             CGContextSetBlendMode(ctx, kCGBlendModeNormal);
-            CGContextSetFillColorWithColor(ctx, _edgeColor ? [_edgeColor CGColor] : [[UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f] CGColor]);
+            UIColor *topEdgeColor = _topEdgeColor;
+            if (!topEdgeColor) {
+                _edgeColor ? _edgeColor : [UIColor colorWithRed:.1f green:.1f blue:.1f alpha:.8f];
+            }
+            CGContextSetFillColorWithColor(ctx, topEdgeColor.CGColor);
             CGContextFillRect(ctx, CGRectMake(0, 0, rect.size.width, 1));
             
             CGColorSpaceRelease(colorSpace);

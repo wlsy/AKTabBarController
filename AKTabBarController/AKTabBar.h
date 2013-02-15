@@ -42,6 +42,9 @@
 // Tab top embos Color
 @property (nonatomic, strong) UIColor *edgeColor;
 
+// Top embos Color. optional, default to edgeColor
+@property (nonatomic, strong) UIColor *topEdgeColor;
+
 // Tabs selected colors.
 @property (nonatomic, strong) NSArray *tabColors;
 
