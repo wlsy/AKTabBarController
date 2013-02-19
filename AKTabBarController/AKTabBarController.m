@@ -64,14 +64,8 @@ typedef enum {
 #pragma mark - Initialization
 
 - (id)init
-{
-    self = [super init];
-    if (!self) return nil;
-    
-    // Setting the default tab bar height
-    tabBarHeight = kDefaultTabBarHeight;
-    
-    return self;
+{    
+    return [self initWithTabBarHeight:kDefaultTabBarHeight];
 }
 
 - (id)initWithTabBarHeight:(NSUInteger)height
@@ -80,6 +74,9 @@ typedef enum {
     if (!self) return nil;
     
     tabBarHeight = height;
+    
+    // default settings
+    _iconShadowOffset = CGSizeMake(0, -1);
     
     return self;
 }
@@ -118,6 +115,8 @@ typedef enum {
         [tab setBackgroundImageName:[self backgroundImageName]];
         [tab setSelectedBackgroundImageName:[self selectedBackgroundImageName]];
         [tab setTabIconColors:[self iconCGColors]];
+        [tab setTabIconShadowColor:[self iconShadowColor]];
+        [tab setTabIconShadowOffset:[self iconShadowOffset]];
         [tab setTabIconColorsSelected:[self selectedIconCGColors]];
         [tab setTabIconOuterGlowColorSelected:[self selectedIconOuterGlowColor]];
         [tab setTabSelectedColors:[self selectedTabCGColors]];

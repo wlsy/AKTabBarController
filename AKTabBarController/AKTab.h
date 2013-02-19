@@ -51,6 +51,12 @@
 // Tabs outer glow icon color
 @property (nonatomic, strong) UIColor *tabIconOuterGlowColorSelected;
 
+// Tabs icon shadow color
+@property (nonatomic, strong) UIColor *tabIconShadowColor;
+
+// Tabs icon shadow offset
+@property (nonatomic) CGSize tabIconShadowOffset;
+
 // Tabs selected colors.
 @property (nonatomic, strong) NSArray *tabSelectedColors;
 
