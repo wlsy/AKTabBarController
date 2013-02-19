@@ -282,7 +282,7 @@ typedef enum {
         _selectedViewController = selectedViewController;
         selectedViewController = selectedViewController;
         
-        if (!self.childViewControllers && visible)
+        if ((self.childViewControllers == nil || !self.childViewControllers.count) && visible)
         {
 			[previousSelectedViewController viewWillDisappear:NO];
 			[selectedViewController viewWillAppear:NO];
@@ -290,7 +290,7 @@ typedef enum {
         
         [tabBarView setContentView:selectedViewController.view];
         
-        if (!self.childViewControllers && visible)
+        if ((self.childViewControllers == nil || !self.childViewControllers.count) && visible)
         {
 			[previousSelectedViewController viewDidDisappear:NO];
 			[selectedViewController viewDidAppear:NO];
@@ -351,7 +351,7 @@ typedef enum {
 {
 	[super viewWillAppear:animated];
     
-    if (!self.childViewControllers)
+    if ((self.childViewControllers == nil || !self.childViewControllers.count))
         [self.selectedViewController viewWillAppear:animated];
 }
 
@@ -359,7 +359,7 @@ typedef enum {
 {
 	[super viewDidAppear:animated];
     
-    if (!self.childViewControllers)
+    if ((self.childViewControllers == nil || !self.childViewControllers.count))
         [self.selectedViewController viewDidAppear:animated];
     
     visible = YES;
@@ -369,7 +369,7 @@ typedef enum {
 {
 	[super viewWillDisappear:animated];
     
-    if (!self.childViewControllers)
+    if ((self.childViewControllers == nil || !self.childViewControllers.count))
         [self.selectedViewController viewWillDisappear:animated];
 }
 
