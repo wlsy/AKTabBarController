@@ -181,11 +181,11 @@ static const float kTopMargin = 2.0;
         {
             // We draw the inner shadow which is just the image mask with an offset of 1 pixel
             CGContextSaveGState(ctx);
-            {
-                CGContextTranslateCTM(ctx, 0, offsetY - 1);
+            {                
+                CGContextTranslateCTM(ctx, _tabIconShadowOffset.width, offsetY + _tabIconShadowOffset.height);
                 CGContextScaleCTM(ctx, 1.0, -1.0);
                 CGContextClipToMask(ctx, imageRect, image.CGImage);
-                CGContextSetRGBFillColor(ctx, 0, 0, 0, 0.8);
+                CGContextSetFillColorWithColor(ctx, _tabIconShadowColor ? [_tabIconShadowColor CGColor] : [[UIColor colorWithRed:.0f green:.0f blue:.0f alpha:.8f] CGColor]);
                 CGContextFillRect(ctx, imageRect);
             }
             CGContextRestoreGState(ctx);
@@ -273,7 +273,7 @@ static const float kTopMargin = 2.0;
             {
                 CGContextTranslateCTM(ctx, 0.0, offsetY);
                 CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 10.0, [UIColor colorWithRed:0.169 green:0.418 blue:0.547 alpha:1].CGColor);
+                CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 10.0, _tabIconOuterGlowColorSelected ? [_tabIconOuterGlowColorSelected CGColor] : [UIColor colorWithRed:0.169 green:0.418 blue:0.547 alpha:1].CGColor);
                 CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
                 CGContextDrawImage(ctx, imageRect, image.CGImage);
                 
