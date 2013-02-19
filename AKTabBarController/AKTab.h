@@ -48,6 +48,9 @@
 // Tabs selected icon colors.
 @property (nonatomic, strong) NSArray *tabIconColorsSelected;
 
+// Tabs outer glow icon color
+@property (nonatomic, strong) UIColor *tabIconOuterGlowColorSelected;
+
 // Tabs selected colors.
 @property (nonatomic, strong) NSArray *tabSelectedColors;
 

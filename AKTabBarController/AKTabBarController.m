@@ -119,6 +119,7 @@ typedef enum {
         [tab setSelectedBackgroundImageName:[self selectedBackgroundImageName]];
         [tab setTabIconColors:[self iconCGColors]];
         [tab setTabIconColorsSelected:[self selectedIconCGColors]];
+        [tab setTabIconOuterGlowColorSelected:[self selectedIconOuterGlowColor]];
         [tab setTabSelectedColors:[self selectedTabCGColors]];
         [tab setEdgeColor:[self tabEdgeColor]];
         [tab setTopEdgeColor:[self topEdgeColor]];
