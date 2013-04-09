@@ -120,7 +120,7 @@ static const float kTopMargin = 2.0;
     // Title label
     UILabel *tabTitleLabel = [[UILabel alloc] init];
     tabTitleLabel.text = _tabTitle;
-    tabTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:11.0];
+    tabTitleLabel.font = self.tabTitleFont ?: [UIFont fontWithName:@"Helvetica-Bold" size:11.0];
     CGSize labelSize = [tabTitleLabel.text sizeWithFont:tabTitleLabel.font forWidth:CGRectGetWidth(rect) lineBreakMode:NSLineBreakByTruncatingMiddle ];
     
     CGRect labelRect = CGRectZero;

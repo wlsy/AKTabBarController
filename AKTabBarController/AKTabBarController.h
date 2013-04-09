@@ -78,10 +78,13 @@
 @property (nonatomic, strong) NSString *selectedBackgroundImageName;
 
 // Tab text color
-@property (nonatomic, strong)  UIColor *textColor;
+@property (nonatomic, strong) UIColor *textColor;
 
 // Tab selected text color
-@property (nonatomic, strong)  UIColor *selectedTextColor;
+@property (nonatomic, strong) UIColor *selectedTextColor;
+
+// Tab title font
+@property (nonatomic, strong) UIFont *textFont;
 
 // Initialization with a specific height.
 - (id)initWithTabBarHeight:(NSUInteger)height;
