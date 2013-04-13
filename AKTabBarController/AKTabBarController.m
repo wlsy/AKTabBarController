@@ -145,7 +145,7 @@ typedef enum {
     [tabBar setTabs:tabs];
     
     // Setting the first view controller as the active one
-    [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:0]];
+    if ([tabs count] > 0) [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:0]];
 }
 
 - (NSArray *) selectedIconCGColors
@@ -272,7 +272,7 @@ typedef enum {
     [self loadTabs];
     
     // When setting the view controllers, the first vc is the selected one;
-    [self setSelectedViewController:[viewControllers objectAtIndex:0]];
+    if ([viewControllers count] > 0) [self setSelectedViewController:[viewControllers objectAtIndex:0]];
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
