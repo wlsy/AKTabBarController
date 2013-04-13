@@ -302,6 +302,15 @@ typedef enum {
     }
 }
 
+#pragma mark - Hide / Show Methods
+
+- (void)showTabBarAnimated:(BOOL)animated {
+    [self showTabBar:AKShowHideFromRight animated:animated];
+}
+
+- (void)hideTabBarAnimated:(BOOL)animated {
+    [self hideTabBar:AKShowHideFromRight animated:animated];
+}
 
 #pragma mark - Required Protocol Method
 

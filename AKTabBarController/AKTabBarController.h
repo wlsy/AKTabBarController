@@ -86,4 +86,9 @@
 // Initialization with a specific height.
 - (id)initWithTabBarHeight:(NSUInteger)height;
 
+// Hide / Show Methods
+
+- (void)showTabBarAnimated:(BOOL)animated;
+- (void)hideTabBarAnimated:(BOOL)animated;
+
 @end
