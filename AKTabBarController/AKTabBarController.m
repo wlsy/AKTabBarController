@@ -97,7 +97,6 @@ typedef enum {
     tabBarView.tabBar = tabBar;
     tabBarView.contentView = _selectedViewController.view;
     [[self navigationItem] setTitle:[_selectedViewController title]];
-    [self loadTabs];
 }
 
 - (void)loadTabs
@@ -268,6 +267,9 @@ typedef enum {
 - (void)setViewControllers:(NSMutableArray *)viewControllers
 {
     _viewControllers = viewControllers;
+    
+    // Load the tabs on the go
+    [self loadTabs];
     
     // When setting the view controllers, the first vc is the selected one;
     [self setSelectedViewController:[viewControllers objectAtIndex:0]];
