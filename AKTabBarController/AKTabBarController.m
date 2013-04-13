@@ -40,9 +40,6 @@ typedef enum {
     AKShowHideFromRight
 } AKShowHideFrom;
 
-// Current active view controller
-@property (nonatomic, strong) UIViewController *selectedViewController;
-
 - (void)loadTabs;
 - (void)showTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated;
 - (void)hideTabBar:(AKShowHideFrom)showHideFrom animated:(BOOL)animated;
@@ -97,6 +94,7 @@ typedef enum {
     tabBarView.tabBar = tabBar;
     tabBarView.contentView = _selectedViewController.view;
     [[self navigationItem] setTitle:[_selectedViewController title]];
+    [self loadTabs];
 }
 
 - (void)loadTabs
@@ -268,21 +266,23 @@ typedef enum {
 {
     _viewControllers = viewControllers;
     
-    // Load the tabs on the go
-    [self loadTabs];
-    
     // When setting the view controllers, the first vc is the selected one;
     if ([viewControllers count] > 0) [self setSelectedViewController:[viewControllers objectAtIndex:0]];
+    
+    // Load the tabs on the go
+    [self loadTabs];
 }
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
 {
     UIViewController *previousSelectedViewController = selectedViewController;
-    if (_selectedViewController != selectedViewController)
+    NSInteger selectedIndex = [self.viewControllers indexOfObject:selectedViewController];
+    
+    if (_selectedViewController != selectedViewController && selectedIndex != NSNotFound)
     {
         
         _selectedViewController = selectedViewController;
-        selectedViewController = selectedViewController;
+        _selectedIndex = selectedIndex;
         
         if ((self.childViewControllers == nil || !self.childViewControllers.count) && visible)
         {
@@ -300,6 +300,11 @@ typedef enum {
         
         [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:[self.viewControllers indexOfObject:selectedViewController]]];
     }
+}
+
+- (void)setSelectedIndex:(NSInteger *)selectedIndex
+{
+    [self setSelectedViewController:[self.viewControllers objectAtIndex:selectedIndex]];
 }
 
 #pragma mark - Hide / Show Methods
