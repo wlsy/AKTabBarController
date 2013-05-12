@@ -13,6 +13,7 @@ AKTabBarController is an adaptive and customizable tab bar for iOS.
 - Icons are resized when needed and particularly in landscape mode.
 - Animated state of the tabs with a nice cross fade animation.
 - Support pre-rendered images (no glossy effect will be applied).
+- Set a custom font for tab titles.
 
 ## Preview
 ###iPhone portrait
