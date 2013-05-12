@@ -145,27 +145,27 @@ typedef enum {
     [tabBar setTabs:tabs];
     
     // Setting the first view controller as the active one
-    if ([tabs count] > 0) [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:_selectedIndex]];
+    if ([tabs count] > 0) [tabBar setSelectedTab:(tabBar.tabs)[_selectedIndex]];
 }
 
 - (NSArray *) selectedIconCGColors
 {
-    return _selectedIconColors ? @[(id)[[_selectedIconColors objectAtIndex:0] CGColor], (id)[[_selectedIconColors objectAtIndex:1] CGColor]] : nil;
+    return _selectedIconColors ? @[(id)[_selectedIconColors[0] CGColor], (id)[_selectedIconColors[1] CGColor]] : nil;
 }
 
 - (NSArray *) iconCGColors
 {
-    return _iconColors ? @[(id)[[_iconColors objectAtIndex:0] CGColor], (id)[[_iconColors objectAtIndex:1] CGColor]] : nil;
+    return _iconColors ? @[(id)[_iconColors[0] CGColor], (id)[_iconColors[1] CGColor]] : nil;
 }
 
 - (NSArray *) tabCGColors
 {
-    return _tabColors ? @[(id)[[_tabColors objectAtIndex:0] CGColor], (id)[[_tabColors objectAtIndex:1] CGColor]] : nil;
+    return _tabColors ? @[(id)[_tabColors[0] CGColor], (id)[_tabColors[1] CGColor]] : nil;
 }
 
 - (NSArray *) selectedTabCGColors
 {
-    return _selectedTabColors ? @[(id)[[_selectedTabColors objectAtIndex:0] CGColor], (id)[[_selectedTabColors objectAtIndex:1] CGColor]] : nil;
+    return _selectedTabColors ? @[(id)[_selectedTabColors[0] CGColor], (id)[_selectedTabColors[1] CGColor]] : nil;
 }
 
 #pragma - UINavigationControllerDelegate
@@ -269,7 +269,7 @@ typedef enum {
     _viewControllers = viewControllers;
     
     // When setting the view controllers, the first vc is the selected one;
-    if ([viewControllers count] > 0) [self setSelectedViewController:[viewControllers objectAtIndex:0]];
+    if ([viewControllers count] > 0) [self setSelectedViewController:viewControllers[0]];
     
     // Load the tabs on the go
     [self loadTabs];
@@ -300,13 +300,13 @@ typedef enum {
 			[selectedViewController viewDidAppear:NO];
 		}
         
-        [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:selectedIndex]];
+        [tabBar setSelectedTab:(tabBar.tabs)[selectedIndex]];
     }
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex
 {
-    [self setSelectedViewController:[self.viewControllers objectAtIndex:selectedIndex]];
+    [self setSelectedViewController:(self.viewControllers)[selectedIndex]];
 }
 
 #pragma mark - Hide / Show Methods
@@ -323,7 +323,7 @@ typedef enum {
 
 - (void)tabBar:(AKTabBar *)AKTabBarDelegate didSelectTabAtIndex:(NSInteger)index
 {
-    UIViewController *vc = [self.viewControllers objectAtIndex:index];
+    UIViewController *vc = (self.viewControllers)[index];
     
     if (self.selectedViewController == vc)
     {

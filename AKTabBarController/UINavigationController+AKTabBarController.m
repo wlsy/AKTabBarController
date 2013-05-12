@@ -26,12 +26,12 @@
 
 - (NSString *)tabImageName
 {
-	return [[self.viewControllers objectAtIndex:0] tabImageName];
+	return [(self.viewControllers)[0] tabImageName];
 }
 
 - (NSString *)tabTitle
 {
-	return [[self.viewControllers objectAtIndex:0] tabTitle];
+	return [(self.viewControllers)[0] tabTitle];
 }
 
 @end
