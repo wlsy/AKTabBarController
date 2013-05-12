@@ -179,38 +179,47 @@ static const float kTopMargin = 2.0;
         
         if (isTabIconPresent)
         {
-            // We draw the inner shadow which is just the image mask with an offset of 1 pixel
-            CGContextSaveGState(ctx);
-            {                
-                CGContextTranslateCTM(ctx, _tabIconShadowOffset.width, offsetY + _tabIconShadowOffset.height);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextClipToMask(ctx, imageRect, image.CGImage);
-                CGContextSetFillColorWithColor(ctx, _tabIconShadowColor ? [_tabIconShadowColor CGColor] : [[UIColor colorWithRed:.0f green:.0f blue:.0f alpha:.8f] CGColor]);
-                CGContextFillRect(ctx, imageRect);
+            if(self.tabIconPreRendered) {
+                // Simply draw the pre-rendered image.
+                CGContextSaveGState(ctx);
+                {
+                    CGContextDrawImage(ctx, imageRect, image.CGImage);
+                }
+                CGContextRestoreGState(ctx);
+            } else {
+                // We draw the inner shadow which is just the image mask with an offset of 1 pixel
+                CGContextSaveGState(ctx);
+                {                
+                    CGContextTranslateCTM(ctx, _tabIconShadowOffset.width, offsetY + _tabIconShadowOffset.height);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
+                    CGContextClipToMask(ctx, imageRect, image.CGImage);
+                    CGContextSetFillColorWithColor(ctx, _tabIconShadowColor ? [_tabIconShadowColor CGColor] : [[UIColor colorWithRed:.0f green:.0f blue:.0f alpha:.8f] CGColor]);
+                    CGContextFillRect(ctx, imageRect);
+                }
+                CGContextRestoreGState(ctx);
+                
+                // We draw the inner gradient
+                CGContextSaveGState(ctx);
+                {
+                    CGContextTranslateCTM(ctx, 0, offsetY);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
+                    CGContextClipToMask(ctx, imageRect, image.CGImage);
+                    
+                    size_t num_locations = 2;
+                    CGFloat locations[2] = {1.0, 0.0};
+                    CGFloat components[8] = {0.353, 0.353, 0.353, 1.0, // Start color
+                        0.612, 0.612, 0.612, 1.0};  // End color
+                    
+                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                    CGGradientRef gradient = _tabIconColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
+                    
+                    CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
+                    
+                    CGColorSpaceRelease(colorSpace);
+                    CGGradientRelease(gradient);
+                }
+                CGContextRestoreGState(ctx);
             }
-            CGContextRestoreGState(ctx);
-            
-            // We draw the inner gradient
-            CGContextSaveGState(ctx);
-            {
-                CGContextTranslateCTM(ctx, 0, offsetY);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextClipToMask(ctx, imageRect, image.CGImage);
-                
-                size_t num_locations = 2;
-                CGFloat locations[2] = {1.0, 0.0};
-                CGFloat components[8] = {0.353, 0.353, 0.353, 1.0, // Start color
-                    0.612, 0.612, 0.612, 1.0};  // End color
-                
-                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                CGGradientRef gradient = _tabIconColors ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColors, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
-                
-                CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
-                
-                CGColorSpaceRelease(colorSpace);
-                CGGradientRelease(gradient);
-            }
-            CGContextRestoreGState(ctx);
         }
         
         if (displayTabTitle) {
@@ -268,82 +277,91 @@ static const float kTopMargin = 2.0;
         
         if (isTabIconPresent)
         {
-            // We draw the outer glow
-            CGContextSaveGState(ctx);
-            {
-                CGContextTranslateCTM(ctx, 0.0, offsetY);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 10.0, _tabIconOuterGlowColorSelected ? [_tabIconOuterGlowColorSelected CGColor] : [UIColor colorWithRed:0.169 green:0.418 blue:0.547 alpha:1].CGColor);
-                CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
-                CGContextDrawImage(ctx, imageRect, image.CGImage);
+            if(self.tabIconPreRendered) {
+                // Simply draw the pre-rendered image.
+                CGContextSaveGState(ctx);
+                {
+                    CGContextDrawImage(ctx, imageRect, image.CGImage);
+                }
+                CGContextRestoreGState(ctx);
+            } else {
+                // We draw the outer glow
+                CGContextSaveGState(ctx);
+                {
+                    CGContextTranslateCTM(ctx, 0.0, offsetY);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
+                    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 10.0, _tabIconOuterGlowColorSelected ? [_tabIconOuterGlowColorSelected CGColor] : [UIColor colorWithRed:0.169 green:0.418 blue:0.547 alpha:1].CGColor);
+                    CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
+                    CGContextDrawImage(ctx, imageRect, image.CGImage);
+                    
+                }
+                CGContextRestoreGState(ctx);
                 
+                // We draw the inner gradient
+                CGContextSaveGState(ctx);
+                {
+                    CGContextTranslateCTM(ctx, 0, offsetY);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
+                    CGContextClipToMask(ctx, imageRect, image.CGImage);
+                    
+                    size_t num_locations = 2;
+                    CGFloat locations[2] = {1.0, 0.2};
+                    CGFloat components[8] = {0.082, 0.369, 0.663, 1.0, // Start color
+                        0.537, 0.773, 0.988, 1.0};  // End color
+                    
+                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                    CGGradientRef gradient = _tabIconColorsSelected ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColorsSelected, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
+                    
+                    CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
+                    
+                    CGColorSpaceRelease(colorSpace);
+                    CGGradientRelease(gradient);
+                }
+                CGContextRestoreGState(ctx);
+                
+                
+                // We draw the glossy effect over the image
+                CGContextSaveGState(ctx);
+                {
+                    // Center of the circle + an offset to have the right angle no matter the size of the container
+                    CGFloat posX = CGRectGetMinX(container) - CGRectGetHeight(container);
+                    CGFloat posY = CGRectGetMinY(container) - CGRectGetHeight(container) * 2 - CGRectGetWidth(container);
+                    
+                    // Getting the icon center
+                    CGFloat dX = CGRectGetMidX(imageRect) - posX;
+                    CGFloat dY = CGRectGetMidY(imageRect) - posY;
+                    
+                    // Calculating the radius
+                    CGFloat radius = sqrtf((dX * dX) + (dY * dY));
+                    
+                    // We draw the circular path
+                    CGMutablePathRef glossPath = CGPathCreateMutable();
+                    CGPathAddArc(glossPath, NULL, posX, posY, radius, M_PI, 0, YES);
+                    CGPathCloseSubpath(glossPath);
+                    CGContextAddPath(ctx, glossPath);
+                    CGContextClip(ctx);
+                    
+                    // Clipping to the image path
+                    CGContextTranslateCTM(ctx, 0, offsetY);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
+                    CGContextClipToMask(ctx, imageRect, image.CGImage);
+                    
+                    // Drawing the clipped gradient
+                    size_t num_locations = 2;
+                    CGFloat locations[2] = {1, 0};
+                    CGFloat components[8] = {1.0, 1.0, 1.0, _glossyIsHidden ? 0 : 0.5, // Start color
+                        1.0, 1.0, 1.0, _glossyIsHidden ? 0 : 0.15};  // End color
+                    
+                    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+                    CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
+                    CGContextDrawRadialGradient(ctx, gradient, CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect)), 0, CGPointMake(CGRectGetMaxX(imageRect), CGRectGetMaxY(imageRect)), radius, kCGGradientDrawsBeforeStartLocation);
+                    
+                    CGColorSpaceRelease(colorSpace);
+                    CGGradientRelease(gradient);
+                    CGPathRelease(glossPath);
+                }
+                CGContextRestoreGState(ctx);
             }
-            CGContextRestoreGState(ctx);
-            
-            // We draw the inner gradient
-            CGContextSaveGState(ctx);
-            {
-                CGContextTranslateCTM(ctx, 0, offsetY);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextClipToMask(ctx, imageRect, image.CGImage);
-                
-                size_t num_locations = 2;
-                CGFloat locations[2] = {1.0, 0.2};
-                CGFloat components[8] = {0.082, 0.369, 0.663, 1.0, // Start color
-                    0.537, 0.773, 0.988, 1.0};  // End color
-                
-                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                CGGradientRef gradient = _tabIconColorsSelected ? CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_tabIconColorsSelected, locations) : CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
-                
-                CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, imageRect.origin.y + imageRect.size.height), CGPointMake(0, imageRect.origin.y), kCGGradientDrawsAfterEndLocation);
-                
-                CGColorSpaceRelease(colorSpace);
-                CGGradientRelease(gradient);
-            }
-            CGContextRestoreGState(ctx);
-            
-            
-            // We draw the glossy effect over the image
-            CGContextSaveGState(ctx);
-            {
-                // Center of the circle + an offset to have the right angle no matter the size of the container
-                CGFloat posX = CGRectGetMinX(container) - CGRectGetHeight(container);
-                CGFloat posY = CGRectGetMinY(container) - CGRectGetHeight(container) * 2 - CGRectGetWidth(container);
-                
-                // Getting the icon center
-                CGFloat dX = CGRectGetMidX(imageRect) - posX;
-                CGFloat dY = CGRectGetMidY(imageRect) - posY;
-                
-                // Calculating the radius
-                CGFloat radius = sqrtf((dX * dX) + (dY * dY));
-                
-                // We draw the circular path
-                CGMutablePathRef glossPath = CGPathCreateMutable();
-                CGPathAddArc(glossPath, NULL, posX, posY, radius, M_PI, 0, YES);
-                CGPathCloseSubpath(glossPath);
-                CGContextAddPath(ctx, glossPath);
-                CGContextClip(ctx);
-                
-                // Clipping to the image path
-                CGContextTranslateCTM(ctx, 0, offsetY);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextClipToMask(ctx, imageRect, image.CGImage);
-                
-                // Drawing the clipped gradient
-                size_t num_locations = 2;
-                CGFloat locations[2] = {1, 0};
-                CGFloat components[8] = {1.0, 1.0, 1.0, _glossyIsHidden ? 0 : 0.5, // Start color
-                    1.0, 1.0, 1.0, _glossyIsHidden ? 0 : 0.15};  // End color
-                
-                CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-                CGGradientRef gradient = CGGradientCreateWithColorComponents (colorSpace, components, locations, num_locations);
-                CGContextDrawRadialGradient(ctx, gradient, CGPointMake(CGRectGetMinX(imageRect), CGRectGetMinY(imageRect)), 0, CGPointMake(CGRectGetMaxX(imageRect), CGRectGetMaxY(imageRect)), radius, kCGGradientDrawsBeforeStartLocation);
-                
-                CGColorSpaceRelease(colorSpace);
-                CGGradientRelease(gradient);
-                CGPathRelease(glossPath);
-            }
-            CGContextRestoreGState(ctx);
         }
         
         if (displayTabTitle) {
