@@ -33,7 +33,7 @@
 @property (nonatomic, strong) UIViewController *selectedViewController;
 
 // Current active view controller index
-@property (nonatomic, assign) NSInteger *selectedIndex;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 // This is the minimum height to display the title.
 @property (nonatomic, assign) CGFloat minimumHeightToDisplayTitle;

@@ -145,7 +145,7 @@ typedef enum {
     [tabBar setTabs:tabs];
     
     // Setting the first view controller as the active one
-    if ([tabs count] > 0) [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:0]];
+    if ([tabs count] > 0) [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:_selectedIndex]];
 }
 
 - (NSArray *) selectedIconCGColors
@@ -277,7 +277,7 @@ typedef enum {
 
 - (void)setSelectedViewController:(UIViewController *)selectedViewController
 {
-    UIViewController *previousSelectedViewController = selectedViewController;
+    UIViewController *previousSelectedViewController = _selectedViewController;
     NSInteger selectedIndex = [self.viewControllers indexOfObject:selectedViewController];
     
     if (_selectedViewController != selectedViewController && selectedIndex != NSNotFound)
@@ -300,11 +300,11 @@ typedef enum {
 			[selectedViewController viewDidAppear:NO];
 		}
         
-        [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:[self.viewControllers indexOfObject:selectedViewController]]];
+        [tabBar setSelectedTab:[tabBar.tabs objectAtIndex:selectedIndex]];
     }
 }
 
-- (void)setSelectedIndex:(NSInteger *)selectedIndex
+- (void)setSelectedIndex:(NSInteger)selectedIndex
 {
     [self setSelectedViewController:[self.viewControllers objectAtIndex:selectedIndex]];
 }
