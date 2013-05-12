@@ -56,6 +56,9 @@
 // Tabs selected colors.
 @property (nonatomic, strong) NSArray *selectedTabColors;
 
+// Tabs icon pre-rendered yes / no
+@property (nonatomic, assign) BOOL tabIconPreRendered;
+
 // Tabs icon glossy show / hide
 @property (nonatomic, assign) BOOL iconGlossyIsHidden;
 
