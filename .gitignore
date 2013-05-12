@@ -16,3 +16,8 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+
+# AppCode
+.idea
+Build
+DerivedData

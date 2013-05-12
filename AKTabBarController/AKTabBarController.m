@@ -128,8 +128,9 @@ typedef enum {
         [tab setInnerStrokeColor:[self tabInnerStrokeColor]];
         [tab setTextColor:[self textColor]];
         [tab setSelectedTextColor:[self selectedTextColor]];
+        [tab setTabTitleFont:[self textFont]];
         [tab setTabTitle:[vc tabTitle]];
-        
+
         [tab setTabBarHeight:tabBarHeight];
         
         if (_minimumHeightToDisplayTitle)

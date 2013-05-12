@@ -105,6 +105,9 @@ When pushing a viewcontroller in the viewControllers stack of an UINavigationCon
 [_tabBarController setTextColor:[UIColor colorWithRed:157.0/255.0 green:157.0/255.0 blue:157.0/255.0 alpha:1.0]];
 [_tabBarController setSelectedTextColor:[UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:1.0]];
 
+// Text font
+[_tabBarController setTextFont:[UIFont fontWithName:@"Chalkduster" size:14]];
+
 // Hide / Show glossy effect on tab icons
 [_tabBarController setIconGlossyIsHidden:YES];
 

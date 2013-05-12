@@ -39,13 +39,16 @@
 // Tab selected text color
 @property (nonatomic, strong) UIColor *selectedTextColor;
 
-// Tabs title.
+// Tabs title
 @property (nonatomic, strong) NSString *tabTitle;
 
-// Tabs icon colors.
+// Tabs title font
+@property (nonatomic, strong) UIFont *tabTitleFont;
+
+// Tabs icon colors
 @property (nonatomic, strong) NSArray *tabIconColors;
 
-// Tabs selected icon colors.
+// Tabs selected icon colors
 @property (nonatomic, strong) NSArray *tabIconColorsSelected;
 
 // Tabs outer glow icon color
