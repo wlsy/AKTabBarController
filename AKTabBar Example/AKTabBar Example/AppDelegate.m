@@ -36,7 +36,7 @@
                                                [[FourthViewController alloc] init],nil]];
     
     
-    // Below you will find an example of possible customization, just uncomment the lines
+    // Below you will find an example of the possible customizations, just uncomment the lines below
     
     /*
     // Tab background Image
@@ -78,6 +78,9 @@
     
     // Hide / Show glossy on tab icons
     [_tabBarController setIconGlossyIsHidden:YES];
+     
+    // Enable / Disable pre-rendered image mode
+    [_tabBarController setTabIconPreRendered:YES];
     */
     
     [_window setRootViewController:_tabBarController];
