@@ -183,6 +183,8 @@ static const float kTopMargin = 2.0;
                 // Simply draw the pre-rendered image.
                 CGContextSaveGState(ctx);
                 {
+                    CGContextTranslateCTM(ctx, 0.0, offsetY);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
                     CGContextDrawImage(ctx, imageRect, image.CGImage);
                 }
                 CGContextRestoreGState(ctx);
@@ -281,6 +283,8 @@ static const float kTopMargin = 2.0;
                 // Simply draw the pre-rendered image.
                 CGContextSaveGState(ctx);
                 {
+                    CGContextTranslateCTM(ctx, 0.0, offsetY);
+                    CGContextScaleCTM(ctx, 1.0, -1.0);
                     CGContextDrawImage(ctx, imageRect, image.CGImage);
                 }
                 CGContextRestoreGState(ctx);
