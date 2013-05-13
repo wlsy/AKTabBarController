@@ -46,6 +46,7 @@
         [self addSubview:_contentView];
         [self sendSubviewToBack:_contentView];
         [_contentView setNeedsDisplay];
+        [self layoutIfNeeded];
     }
 }
 
