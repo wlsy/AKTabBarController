@@ -99,8 +99,10 @@
 - (id)initWithTabBarHeight:(NSUInteger)height;
 
 // Hide / Show Methods
-
 - (void)showTabBarAnimated:(BOOL)animated;
 - (void)hideTabBarAnimated:(BOOL)animated;
+
+// Refresh the Tab Bar
+- (void)loadTabs;
 
 @end
