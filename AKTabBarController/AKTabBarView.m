@@ -43,10 +43,11 @@
     {
         [_contentView removeFromSuperview];
         _contentView = contentView;
+        _contentView.frame = CGRectMake(0, 0, self.bounds.size.width, self.tabBar.frame.origin.y);
         [self addSubview:_contentView];
         [self sendSubviewToBack:_contentView];
         [_contentView setNeedsDisplay];
-        [self layoutIfNeeded];
+        [self setNeedsLayout];
     }
 }
 
