@@ -22,6 +22,8 @@
 
 #import "UIViewController+AKTabBarController.h"
 
+#import "AKTabBarController.h"
+
 @implementation UIViewController (AKTabBarController)
 
 - (NSString *)tabImageName
@@ -32,6 +34,20 @@
 - (NSString *)tabTitle
 {
 	return nil;
+}
+
+- (AKTabBarController *)akTabBarController
+{
+    UIViewController *parent = self.parentViewController;
+    Class cls = [AKTabBarController class];
+    while(parent) {
+        if([parent isKindOfClass:cls]) {
+            return (AKTabBarController*) parent;
+        }
+        parent = parent.parentViewController;
+    }
+
+    return nil;
 }
 
 @end
