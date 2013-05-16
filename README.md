@@ -63,6 +63,24 @@ _tabBarController = [[AKTabBarController alloc] initWithTabBarHeight:50];
 	return @"Tab";
 }
 ```
+
+## Accessing the current AKTabViewController instance
+
+``` objective-c
+// Ensure to import AKTabController and the category for UIViewController
+#import <AKTabBarController.h>
+#import <AKTabBarController/UIViewController+AKTabBarController.h>
+
+// It's now possible to access the current AKTabBarController instance.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.akTabBarController setTextColor:[UIColor redColor]];
+}
+```
+
+**Note**: self.akTabBarController returns nil on devices running iOS < 5.0.
+
 ## Customization
 ### Setting the minimum height to display the title
 
