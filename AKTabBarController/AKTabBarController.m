@@ -268,6 +268,13 @@ typedef enum {
 {
     _viewControllers = viewControllers;
     
+    // Add the view controllers as child view controllers, so they can find this controller
+    if([self respondsToSelector:@selector(addChildViewController:)]) {
+        for(UIViewController* vc in _viewControllers) {
+            [self addChildViewController:vc];
+        }
+    }
+
     // When setting the view controllers, the first vc is the selected one;
     if ([viewControllers count] > 0) [self setSelectedViewController:viewControllers[0]];
     

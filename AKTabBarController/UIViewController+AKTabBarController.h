@@ -20,10 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+@class AKTabBarController;
+
 @interface UIViewController (AKTabBarController)
 
 - (NSString *)tabImageName;
 
 - (NSString *)tabTitle;
+
+- (AKTabBarController*)akTabBarController;
 
 @end
