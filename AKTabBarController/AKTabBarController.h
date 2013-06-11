@@ -83,6 +83,10 @@
 // Tab background image
 @property (nonatomic, strong) NSString *backgroundImageName;
 
+
+// Tab clear style
+@property (nonatomic, assign) BOOL tabBarFlatStyle;
+
 // Tab selected background image
 @property (nonatomic, strong) NSString *selectedBackgroundImageName;
 

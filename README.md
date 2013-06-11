@@ -1,3 +1,7 @@
+Add a Custom style property that remove hide tab innerStroke and tabbar gradient
+
+    [_tabBarController setTabBarFlatStyle:YES];
+
 #AKTabBarController
 
 AKTabBarController is an adaptive and customizable tab bar for iOS.

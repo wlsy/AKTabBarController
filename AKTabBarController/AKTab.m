@@ -167,15 +167,17 @@ static const float kTopMargin = 2.0;
     
     if (!self.selected) {
         
-        // We draw the vertical lines for the border
-        CGContextSaveGState(ctx);
-        {
-            CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
-            CGContextSetFillColorWithColor(ctx, _innerStrokeColor ? [_innerStrokeColor CGColor] : [[UIColor colorWithRed:.7f green:.7f blue:.7f alpha:.1f] CGColor]);
-            CGContextFillRect(ctx, CGRectMake(0, kTopMargin, 1, rect.size.height - kTopMargin));
-            CGContextFillRect(ctx, CGRectMake(rect.size.width - 1, 2, 1, rect.size.height - 2));
+        if (self.innerStrokeIsHidden) {
+            // We draw the vertical lines for the border
+            CGContextSaveGState(ctx);
+            {
+                CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
+                CGContextSetFillColorWithColor(ctx, _innerStrokeColor ? [_innerStrokeColor CGColor] : [[UIColor colorWithRed:.7f green:.7f blue:.7f alpha:.1f] CGColor]);
+                CGContextFillRect(ctx, CGRectMake(0, kTopMargin, 1, rect.size.height - kTopMargin));
+                CGContextFillRect(ctx, CGRectMake(rect.size.width - 1, 2, 1, rect.size.height - 2));
+            }
+            CGContextRestoreGState(ctx);
         }
-        CGContextRestoreGState(ctx);
         
         if (isTabIconPresent)
         {

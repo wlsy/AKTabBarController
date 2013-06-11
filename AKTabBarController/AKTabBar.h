@@ -51,6 +51,12 @@
 // Tab background image
 @property (nonatomic, strong) NSString *backgroundImageName;
 
+// Tab background color
+@property (nonatomic, strong) UIColor *backgroundColor;
+
+// Tab clear style
+@property (nonatomic, assign) BOOL flatStyle;
+
 - (void)tabSelected:(AKTab *)sender;
 
 @end

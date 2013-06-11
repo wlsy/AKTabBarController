@@ -103,6 +103,7 @@ typedef enum {
     for (UIViewController *vc in self.viewControllers)
     {
         [[tabBarView tabBar] setBackgroundImageName:[self backgroundImageName]];
+        [[tabBarView tabBar] setFlatStyle:[self tabBarFlatStyle]];
         [[tabBarView tabBar] setTabColors:[self tabCGColors]];
         [[tabBarView tabBar] setEdgeColor:[self tabEdgeColor]];
         [[tabBarView tabBar] setTopEdgeColor:[self topEdgeColor]];

@@ -75,6 +75,9 @@
 // Tab inner stroke Color
 @property (nonatomic, strong) UIColor *innerStrokeColor;
 
+// Tab inner stroke Color show / hide for flat style
+@property (nonatomic, assign) BOOL innerStrokeIsHidden;
+
 // Tab top embos Color
 @property (nonatomic, strong) UIColor *edgeColor;
 
